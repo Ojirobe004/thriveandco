@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thrive & Co. | Helping Ambitious Brands Thrive</title>
+    <meta name="description" content="Thrive & Co. helps ambitious brands grow through digital marketing, brand design, content strategy, and game solutions.">
+    <link rel="icon" type="image/png" href="https://placehold.co/32x32/6E2233/FFFFFF/png?text=T">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================
+   LIGHT MODE TOKENS
+============================ */
+:root {
+    --wine:       #6E2233;
+    --wine-h:     #8D3A46;
+    --wine-light: #f9f0f2;
+    --dark:       #1a1a1a;
+    --bg:         #ffffff;
+    --bg-off:     #f8f7f5;
+    --bg-card:    #ffffff;
+    --border:     #e5e7eb;
+    --text:       #333333;
+    --text-m:     #6b7280;
+    --radius:     14px;
+    --radius-lg:  20px;
+    --sh-card:    0 2px 16px rgba(0,0,0,0.06);
+    --sh-hover:   0 20px 44px rgba(0,0,0,0.12);
+}
+/* ============================
+   DARK MODE TOKENS
+============================ */
+[data-theme="dark"] {
+    --dark:       #f1f0ee;
+    --bg:         #111111;
+    --bg-off:     #181818;
+    --bg-card:    #1e1e1e;
+    --border:     #2a2a2a;
+    --text:       #e5e4e2;
+    --text-m:     #9ca3af;
+    --wine-light: rgba(110,34,51,0.18);
+    --sh-card:    0 2px 16px rgba(0,0,0,0.35);
+    --sh-hover:   0 20px 44px rgba(0,0,0,0.55);
+}
+/* ============================
+   BASE
+============================ */
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+    font-family:'Poppins',sans-serif;
+    color:var(--text);
+    background:var(--bg);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    transition:background .3s,color .3s;
+}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:900;line-height:1.1;}
+
+/* ============================
+   NAV — TRANSPARENT / HIDE-ON-SCROLL
+============================ */
+#main-nav{
+    position:fixed;
+    top:0;left:0;right:0;
+    z-index:100;
+    padding-top:env(safe-area-inset-top);
+    background:transparent;
+    border-bottom:1px solid transparent;
+    transition:background .4s ease, border-color .4s ease,
+               backdrop-filter .4s ease, transform .38s cubic-bezier(.4,0,.2,1),
+               box-shadow .4s ease;
+}
+#main-nav.scrolled{
+    background:rgba(255,255,255,.96);
+    border-bottom:1px solid var(--border);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    box-shadow:0 1px 24px rgba(0,0,0,.07);
+}
+[data-theme="dark"] #main-nav.scrolled{
+    background:rgba(17,17,17,.96);
+    border-bottom:1px solid var(--border);
+}
+#main-nav.nav-hidden{transform:translateY(-110%);}
+
+/* Logo / icons white when over hero on mobile */
+@media(max-width:767px){
+    #main-nav:not(.scrolled) .nav-logo{color:#fff!important;}
+    #main-nav:not(.scrolled) .nav-logo-amp{color:rgba(255,255,255,.5)!important;}
+    #main-nav:not(.scrolled) #mob-menu-btn{color:#fff;}
+    #main-nav:not(.scrolled) #dark-mob{color:#fff;border-color:rgba(255,255,255,.3);}
+}
+
+.nav-link{
+    color:var(--text);font-weight:500;font-size:.875rem;
+    text-decoration:none;padding:.25rem 0;position:relative;transition:color .2s;
+}
+.nav-link::after{
+    content:'';position:absolute;bottom:-2px;left:0;
+    width:0;height:2px;background:var(--wine);
+    transition:width .25s;border-radius:2px;
+}
+.nav-link:hover{color:var(--wine);}
+.nav-link:hover::after{width:100%;}
+
+/* Dark toggle */
+.dark-btn{
+    width:36px;height:36px;border-radius:50%;
+    border:1.5px solid var(--border);
+    background:transparent;color:var(--text);
+    cursor:pointer;display:flex;align-items:center;justify-content:center;
+    font-size:.9rem;flex-shrink:0;
+    transition:all .25s ease;
+}
+.dark-btn:hover{background:var(--wine);border-color:var(--wine);color:#fff;transform:rotate(20deg);}
+
+/* ============================
+   MOBILE DRAWER
+============================ */
+#drawer-overlay{
+    position:fixed;inset:0;
+    background:rgba(0,0,0,.55);
+    backdrop-filter:blur(3px);
+    -webkit-backdrop-filter:blur(3px);
+    z-index:200;
+    opacity:0;visibility:hidden;
+    transition:opacity .35s,visibility .35s;
+}
+#drawer-overlay.open{opacity:1;visibility:visible;}
+
+#mobile-drawer{
+    position:fixed;top:0;right:0;
+    width:min(82vw,310px);height:100%;
+    background:var(--bg-card);
+    z-index:201;
+    transform:translateX(100%);
+    transition:transform .4s cubic-bezier(.4,0,.2,1);
+    display:flex;flex-direction:column;
+    box-shadow:-8px 0 48px rgba(0,0,0,.22);
+    overflow-y:auto;-webkit-overflow-scrolling:touch;
+}
+#mobile-drawer.open{transform:translateX(0);}
+
+.d-header{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:1.2rem 1.4rem;
+    border-bottom:1px solid var(--border);flex-shrink:0;
+}
+.d-close{
+    width:38px;height:38px;border-radius:50%;
+    border:1.5px solid var(--border);
+    background:transparent;color:var(--text);
+    cursor:pointer;display:flex;align-items:center;justify-content:center;
+    font-size:1rem;transition:all .2s ease;
+}
+.d-close:hover{background:var(--wine);border-color:var(--wine);color:#fff;transform:rotate(90deg);}
+
+.d-links{padding:1.4rem;display:flex;flex-direction:column;gap:.2rem;flex:1;}
+.d-link{
+    display:flex;align-items:center;gap:.75rem;
+    padding:.8rem 1rem;border-radius:12px;
+    font-size:.93rem;font-weight:500;
+    color:var(--text);text-decoration:none;
+    transition:all .2s ease;
+}
+.d-link:hover{background:var(--wine-light);color:var(--wine);padding-left:1.3rem;}
+.d-link i{width:18px;text-align:center;font-size:.82rem;color:var(--wine);opacity:.8;}
+.d-footer{padding:1.4rem;border-top:1px solid var(--border);flex-shrink:0;}
+
+/* ============================
+   BUTTONS
+============================ */
+.btn-primary,.btn-secondary{
+    min-height:48px;display:inline-flex;align-items:center;justify-content:center;
+    border-radius:var(--radius);font-weight:600;font-family:'Poppins',sans-serif;
+    font-size:.93rem;letter-spacing:.01em;text-decoration:none;
+    cursor:pointer;border:none;padding:.75rem 2rem;
+    transition:all .35s cubic-bezier(.175,.885,.32,1.275);
+}
+.btn-primary{background:var(--wine);color:#fff;box-shadow:0 4px 14px rgba(110,34,51,.3);}
+.btn-primary:hover{background:var(--wine-h);transform:translateY(-2px);box-shadow:0 8px 24px rgba(110,34,51,.4);color:#fff;}
+.btn-primary:active{transform:translateY(0);}
+.btn-secondary{border:2px solid var(--wine);color:var(--wine);background:transparent;}
+.btn-secondary:hover{background:var(--wine);color:#fff;transform:translateY(-2px);}
+
+/* ============================
+   HORIZONTAL SCROLL
+============================ */
+.h-scroll{
+    display:flex;overflow-x:auto;gap:1rem;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;-ms-overflow-style:none;
+    padding-bottom:.5rem;
+}
+.h-scroll::-webkit-scrollbar{display:none;}
+.h-scroll-item{scroll-snap-align:start;flex-shrink:0;width:82vw;max-width:320px;}
+@media(min-width:768px){
+    .h-scroll{display:grid!important;overflow-x:visible;scroll-snap-type:none;padding-bottom:0;}
+    .h-scroll-item{width:auto;max-width:none;}
+}
+.scroll-fade{position:relative;}
+.scroll-fade::after{
+    content:'';position:absolute;top:0;right:0;
+    width:56px;height:100%;
+    background:linear-gradient(to left,var(--bg-off),transparent);
+    pointer-events:none;
+}
+@media(min-width:768px){.scroll-fade::after{display:none;}}
+
+/* ============================
+   HERO MOBILE
+============================ */
+@media(max-width:767px){
+    .hero-section{
+        background-image:linear-gradient(160deg,rgba(75,15,28,.94) 0%,rgba(18,5,9,.97) 100%),
+            url('https://placehold.co/768x600/6E2233/FFFFFF/png?text=+');
+        background-size:cover;background-position:center;
+        min-height:72svh;display:flex;align-items:center;
+    }
+    .hero-section h1,.hero-section p{color:#fff!important;text-shadow:0 2px 12px rgba(0,0,0,.5);}
+    .hero-section .hero-label{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2);}
+    .hero-section .btn-secondary{border-color:rgba(255,255,255,.5);color:#fff;}
+    .hero-section .btn-secondary:hover{background:rgba(255,255,255,.1);color:#fff;}
+}
+
+/* ============================
+   CARDS
+============================ */
+.card{
+    background:var(--bg-card);border-radius:var(--radius);
+    box-shadow:var(--sh-card);
+    transition:transform .3s ease,box-shadow .3s ease;
+}
+.card:hover{transform:translateY(-5px);box-shadow:var(--sh-hover);}
+
+/* ============================
+   LABELS
+============================ */
+.section-label{
+    display:inline-block;font-size:.72rem;font-weight:700;
+    letter-spacing:.12em;text-transform:uppercase;
+    color:var(--wine);background:var(--wine-light);
+    padding:.35rem .85rem;border-radius:99px;margin-bottom:1rem;
+    font-family:'Poppins',sans-serif;
+}
+
+/* ============================
+   CONTACT FORM
+============================ */
+.form-field{
+    width:100%;padding:.85rem 1rem;border-radius:var(--radius);
+    border:1.5px solid var(--border);
+    background:var(--bg);color:var(--text);
+    font-family:'Poppins',sans-serif;font-size:.9rem;
+    transition:border-color .25s,box-shadow .25s;
+    outline:none;-webkit-appearance:none;
+    appearance:none;
+}
+.form-field:focus{border-color:var(--wine);box-shadow:0 0 0 3px rgba(110,34,51,.12);}
+.form-field::placeholder{color:var(--text-m);}
+textarea.form-field{resize:vertical;min-height:130px;}
+.form-label{
+    display:block;font-size:.78rem;font-weight:600;
+    letter-spacing:.05em;text-transform:uppercase;
+    color:var(--text-m);margin-bottom:.4rem;
+}
+
+/* ============================
+   MODAL
+============================ */
+.modal{
+    position:fixed;inset:0;background:rgba(0,0,0,.65);
+    display:flex;justify-content:center;align-items:flex-end;
+    z-index:300;visibility:hidden;opacity:0;
+    transition:opacity .35s,visibility .35s;
+}
+.modal.active{visibility:visible;opacity:1;}
+.modal-content{
+    background:var(--bg-card);color:var(--text);
+    width:100%;max-height:92dvh;overflow-y:auto;
+    border-radius:24px 24px 0 0;padding:2rem 1.5rem;
+    position:relative;transform:translateY(40px);
+    transition:transform .4s cubic-bezier(.34,1.56,.64,1);
+    -webkit-overflow-scrolling:touch;
+}
+.modal.active .modal-content{transform:translateY(0);}
+@media(min-width:768px){
+    .modal{align-items:center;}
+    .modal-content{border-radius:20px;max-width:680px;padding:2.5rem;transform:translateY(20px) scale(.97);}
+    .modal.active .modal-content{transform:translateY(0) scale(1);}
+}
+.modal-handle{width:40px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 1.5rem;}
+@media(min-width:768px){.modal-handle{display:none;}}
+.modal-close-btn{
+    position:absolute;top:1rem;right:1rem;
+    width:36px;height:36px;border-radius:50%;
+    background:var(--wine-light);border:none;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--wine);font-size:1.2rem;
+    transition:all .25s ease;line-height:1;
+}
+.modal-close-btn:hover{background:var(--wine);color:#fff;transform:rotate(90deg);}
+
+/* ============================
+   MISC
+============================ */
+.force-wrap{word-break:break-word;overflow-wrap:break-word;}
+.divider{height:1px;background:linear-gradient(to right,transparent,var(--border),transparent);max-width:80%;margin:0 auto;}
+.trust-bar{background:var(--bg-off);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+footer a{text-decoration:none;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+.fade-up{animation:fadeUp .65s ease both;}
+.fade-up-1{animation-delay:.1s;}
+.fade-up-2{animation-delay:.22s;}
+</style>
+</head>
+<body>
+
+<!-- ============================
+     NAV
+============================ -->
+<nav id="main-nav">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="flex justify-between items-center h-[68px]">
+
+      <!-- Logo -->
+      <a href="#home" style="text-decoration:none;flex-shrink:0;">
+        <span class="nav-logo text-2xl font-black tracking-tight" style="font-family:'Playfair Display',serif;color:var(--wine);">
+          Thrive <span class="nav-logo-amp" style="color:var(--dark);">&</span> Co.
+        </span>
+      </a>
+
+      <!-- Desktop links -->
+      <div class="hidden md:flex items-center gap-7">
+        <a href="#home"          class="nav-link">Home</a>
+        <a href="#about"         class="nav-link">About</a>
+        <a href="#services"      class="nav-link">Services</a>
+        <a href="#portfolio"     class="nav-link">Case Studies</a>
+        <a href="portfolio.html" class="nav-link">Portfolio</a>
+      </div>
+
+      <!-- Desktop right -->
+      <div class="hidden md:flex items-center gap-3">
+        <button id="dark-desk" class="dark-btn" aria-label="Toggle dark mode">
+          <i class="fas fa-moon" id="icon-desk"></i>
+        </button>
+        <a href="#contact-form" class="btn-primary text-sm px-5 py-2.5">Book Free Audit</a>
+      </div>
+
+      <!-- Mobile right -->
+      <div class="flex md:hidden items-center gap-2">
+        <button id="dark-mob" class="dark-btn" aria-label="Toggle dark mode">
+          <i class="fas fa-moon" id="icon-mob"></i>
+        </button>
+        <button id="mob-menu-btn" aria-label="Open menu" aria-expanded="false"
+                style="width:40px;height:40px;border-radius:10px;border:none;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+<!-- Drawer overlay -->
+<div id="drawer-overlay"></div>
+
+<!-- Mobile side drawer -->
+<div id="mobile-drawer" role="dialog" aria-modal="true" aria-label="Navigation">
+  <div class="d-header">
+    <span style="font-family:'Playfair Display',serif;font-weight:900;font-size:1.2rem;color:var(--wine);">Thrive & Co.</span>
+    <button class="d-close" id="d-close-btn" aria-label="Close menu"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="d-links">
+    <a href="#home"          class="d-link"><i class="fas fa-home"></i>Home</a>
+    <a href="#about"         class="d-link"><i class="fas fa-users"></i>About</a>
+    <a href="#services"      class="d-link"><i class="fas fa-briefcase"></i>Services</a>
+    <a href="#portfolio"     class="d-link"><i class="fas fa-chart-bar"></i>Case Studies</a>
+    <a href="portfolio.html" class="d-link"><i class="fas fa-images"></i>Portfolio</a>
+    <a href="#contact-form"  class="d-link"><i class="fas fa-envelope"></i>Contact</a>
+  </div>
+  <div class="d-footer">
+    <a href="#contact-form" class="btn-primary w-full text-sm">Book Free Growth Audit</a>
+  </div>
+</div>
+
+
+<!-- ============================
+     HERO
+============================ -->
+<section id="home" class="hero-section pt-28 pb-14 md:pt-40 md:pb-36 overflow-hidden" style="background:var(--bg);">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 w-full">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="fade-up">
+        <span class="section-label hero-label">Growth Agency</span>
+        <h1 class="text-5xl md:text-7xl lg:text-8xl font-black leading-[1.05] mb-6 tracking-tight" style="color:var(--dark);">
+          Helping Ambitious Brands <em style="color:var(--wine);font-style:italic;">Thrive.</em>
+        </h1>
+        <p class="text-lg md:text-xl mb-8 font-light leading-relaxed max-w-md" style="color:var(--text-m);">
+          We design strategies, content, and campaigns that turn attention into revenue.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="#contact-form" class="btn-primary">Book Free Growth Audit</a>
+          <a href="#process"      class="btn-secondary">See How We Work</a>
+        </div>
+      </div>
+      <div class="hidden md:block fade-up fade-up-2">
+        <div style="border-radius:var(--radius-lg);overflow:hidden;box-shadow:0 40px 80px rgba(110,34,51,.2);">
+          <img src="https://placehold.co/600x660/6E2233/FFFFFF?text=Your+Hero+Image"
+               alt="Thrive & Co." class="w-full h-full object-cover" width="600" height="660" loading="eager">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================
+     TRUST BAR
+============================ -->
+<div class="trust-bar py-4">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="flex flex-wrap justify-center md:justify-around items-center gap-x-8 gap-y-2 text-xs font-semibold tracking-widest uppercase" style="color:var(--text-m);">
+      <span class="flex items-center gap-2"><span style="color:var(--wine);">✓</span>5+ Years Experience</span>
+      <span class="flex items-center gap-2"><span style="color:var(--wine);">✓</span>ROI-Driven Strategies</span>
+      <span class="flex items-center gap-2"><span style="color:var(--wine);">✓</span>Global Client Reach</span>
+      <span class="hidden sm:flex items-center gap-2"><span style="color:var(--wine);">✓</span>Trusted by Startups & Studios</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================
+     ABOUT
+============================ -->
+<section id="about" class="py-24 md:py-36" style="background:var(--bg);">
+  <div class="max-w-4xl mx-auto px-5 sm:px-8 text-center">
+    <span class="section-label">Who We Are</span>
+    <h2 class="text-4xl md:text-5xl tracking-tight mb-6" style="color:var(--dark);">
+      More than an agency —<br><span style="color:var(--wine);">your growth partner.</span>
+    </h2>
+    <p class="text-lg mb-8 max-w-2xl mx-auto leading-relaxed" style="color:var(--text-m);">
+      At Thrive & Co., we believe growth isn't luck — it's built. We partner with founders, brands, and studios to craft strategies that are simple, clear, and profitable.
+    </p>
+    <a href="#" class="text-base font-semibold" style="color:var(--wine);">Learn More About Us →</a>
+  </div>
+</section>
+<div class="divider"></div>
+
+
+<!-- ============================
+     SERVICES
+============================ -->
+<section id="services" class="py-24 md:py-36" style="background:var(--bg-off);">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="text-center mb-14">
+      <span class="section-label">What We Do</span>
+      <h2 class="text-4xl md:text-5xl tracking-tight" style="color:var(--dark);">Our Core Services</h2>
+    </div>
+    <div class="scroll-fade">
+      <div class="h-scroll md:grid-cols-2 lg:grid-cols-5 gap-6">
+
+        <div class="h-scroll-item card border overflow-hidden" style="border-color:var(--border);">
+          <img src="https://placehold.co/320x140/F9F0F2/6E2233?text=Digital+Growth" alt="Digital Growth" class="w-full h-36 object-cover" width="320" height="140" loading="lazy">
+          <div class="p-6">
+            <div class="w-10 h-1 rounded-full mb-4" style="background:var(--wine);"></div>
+            <h3 class="text-xl font-bold mb-2 force-wrap" style="color:var(--dark);">Digital Growth</h3>
+            <p class="text-sm mb-5 force-wrap leading-relaxed" style="color:var(--text-m);">Ads, funnels, and lead generation systems. Scale faster with data-driven campaigns.</p>
+            <a href="#" class="text-sm font-semibold flex items-center gap-1" style="color:var(--wine);">Learn More <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+          </div>
+        </div>
+
+        <div class="h-scroll-item card border overflow-hidden" style="border-color:var(--border);">
+          <img src="https://placehold.co/320x140/F9F0F2/6E2233?text=Brand+%26+Design" alt="Brand & Design" class="w-full h-36 object-cover" width="320" height="140" loading="lazy">
+          <div class="p-6">
+            <div class="w-10 h-1 rounded-full mb-4" style="background:var(--wine);"></div>
+            <h3 class="text-xl font-bold mb-2 force-wrap" style="color:var(--dark);">Brand & Design</h3>
+            <p class="text-sm mb-5 force-wrap leading-relaxed" style="color:var(--text-m);">Websites, landing pages, and full branding. Design that builds trust & converts.</p>
+            <a href="#" class="text-sm font-semibold flex items-center gap-1" style="color:var(--wine);">Learn More <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+          </div>
+        </div>
+
+        <div class="h-scroll-item card border overflow-hidden" style="border-color:var(--border);">
+          <img src="https://placehold.co/320x140/F9F0F2/6E2233?text=Content+%26+Video" alt="Content & Video" class="w-full h-36 object-cover" width="320" height="140" loading="lazy">
+          <div class="p-6">
+            <div class="w-10 h-1 rounded-full mb-4" style="background:var(--wine);"></div>
+            <h3 class="text-xl font-bold mb-2 force-wrap" style="color:var(--dark);">Content & Video</h3>
+            <p class="text-sm mb-5 force-wrap leading-relaxed" style="color:var(--text-m);">Social media, reels, and YouTube strategy. Creative content that drives engagement.</p>
+            <a href="#" class="text-sm font-semibold flex items-center gap-1" style="color:var(--wine);">Learn More <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+          </div>
+        </div>
+
+        <div class="h-scroll-item card border overflow-hidden" style="border-color:var(--border);">
+          <img src="https://placehold.co/320x140/F9F0F2/6E2233?text=SEO+%26+Analytics" alt="SEO & Analytics" class="w-full h-36 object-cover" width="320" height="140" loading="lazy">
+          <div class="p-6">
+            <div class="w-10 h-1 rounded-full mb-4" style="background:var(--wine);"></div>
+            <h3 class="text-xl font-bold mb-2 force-wrap" style="color:var(--dark);">SEO & Analytics</h3>
+            <p class="text-sm mb-5 force-wrap leading-relaxed" style="color:var(--text-m);">Rankings, reporting, and optimization. Be found when customers are searching for you.</p>
+            <a href="#" class="text-sm font-semibold flex items-center gap-1" style="color:var(--wine);">Learn More <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+          </div>
+        </div>
+
+        <div class="h-scroll-item card border overflow-hidden" style="border-color:var(--border);border-top:3px solid var(--wine);">
+          <img src="https://placehold.co/320x140/1a1a1a/6E2233?text=Game+Solutions" alt="Game Solutions" class="w-full h-36 object-cover" width="320" height="140" loading="lazy">
+          <div class="p-6">
+            <div class="w-10 h-1 rounded-full mb-4" style="background:var(--wine);"></div>
+            <h3 class="text-xl font-bold mb-2 force-wrap" style="color:var(--dark);">Game Solutions</h3>
+            <p class="text-sm mb-5 force-wrap leading-relaxed" style="color:var(--text-m);">Marketing, community, and launch strategies for indie games and studios.</p>
+            <a href="portfolio.html#games" class="text-sm font-semibold flex items-center gap-1" style="color:var(--wine);">See Our Work <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================
+     PROCESS
+============================ -->
+<section id="process" class="py-24 md:py-36" style="background:var(--bg);">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8 text-center">
+    <span class="section-label">How It Works</span>
+    <h2 class="text-4xl md:text-5xl tracking-tight mb-14" style="color:var(--dark);">Our Simple 3-Step Process</h2>
+    <div class="scroll-fade">
+      <div class="h-scroll md:grid-cols-3 gap-10">
+        <div class="h-scroll-item flex flex-col items-center text-center px-4">
+          <div class="w-20 h-20 rounded-2xl flex items-center justify-center mb-6 text-white text-3xl font-black" style="background:var(--wine);box-shadow:0 10px 30px rgba(110,34,51,.35);">1</div>
+          <h3 class="text-2xl font-bold mb-3" style="color:var(--dark);">Discover</h3>
+          <p class="text-sm leading-relaxed force-wrap" style="color:var(--text-m);">Start with a <strong style="color:var(--wine);">free</strong> strategy call and audit to clarify goals and find your biggest opportunities.</p>
+        </div>
+        <div class="h-scroll-item flex flex-col items-center text-center px-4">
+          <div class="w-20 h-20 rounded-2xl flex items-center justify-center mb-6 text-white text-3xl font-black" style="background:var(--wine);box-shadow:0 10px 30px rgba(110,34,51,.35);">2</div>
+          <h3 class="text-2xl font-bold mb-3" style="color:var(--dark);">Build</h3>
+          <p class="text-sm leading-relaxed force-wrap" style="color:var(--text-m);">We craft and execute your custom strategy, website, or campaign — tailored to your brand.</p>
+        </div>
+        <div class="h-scroll-item flex flex-col items-center text-center px-4">
+          <div class="w-20 h-20 rounded-2xl flex items-center justify-center mb-6 text-white text-3xl font-black" style="background:var(--wine);box-shadow:0 10px 30px rgba(110,34,51,.35);">3</div>
+          <h3 class="text-2xl font-bold mb-3" style="color:var(--dark);">Grow</h3>
+          <p class="text-sm leading-relaxed force-wrap" style="color:var(--text-m);">Measured results, monthly reports, and continuous optimization for sustained growth.</p>
+        </div>
+      </div>
+    </div>
+    <div class="mt-14"><a href="#contact-form" class="btn-primary text-base px-8">Book a Free Audit</a></div>
+  </div>
+</section>
+
+
+<!-- ============================
+     TESTIMONIALS
+============================ -->
+<section class="py-24 md:py-36" style="background:var(--bg-off);">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="text-center mb-14">
+      <span class="section-label">Social Proof</span>
+      <h2 class="text-4xl md:text-5xl tracking-tight" style="color:var(--dark);">Client Success Stories</h2>
+    </div>
+    <div class="scroll-fade">
+      <div class="h-scroll md:grid-cols-3 gap-6">
+        <div class="h-scroll-item card p-8 border" style="border-color:var(--border);border-left:4px solid var(--wine);">
+          <div class="text-4xl mb-4 font-black" style="color:var(--wine);font-family:'Playfair Display',serif;">"</div>
+          <p class="italic mb-6 force-wrap leading-relaxed" style="color:var(--text-m);">Thrive & Co. helped us <strong style="color:var(--dark);">triple engagement in 60 days</strong>. Clear strategy, excellent execution. Genuinely transformative.</p>
+          <p class="font-semibold text-sm" style="color:var(--wine);">— Client Name, CEO of Tech Start-up</p>
+        </div>
+        <div class="h-scroll-item card p-8 border" style="border-color:var(--border);border-left:4px solid var(--wine);">
+          <div class="text-4xl mb-4 font-black" style="color:var(--wine);font-family:'Playfair Display',serif;">"</div>
+          <p class="italic mb-6 force-wrap leading-relaxed" style="color:var(--text-m);">Our new website immediately improved lead quality. They nailed the branding — it feels premium but completely us.</p>
+          <p class="font-semibold text-sm" style="color:var(--wine);">— Jane Doe, Founder & Creator</p>
+        </div>
+        <div class="h-scroll-item card p-8 border" style="border-color:var(--border);border-left:4px solid var(--wine);">
+          <div class="text-4xl mb-4 font-black" style="color:var(--wine);font-family:'Playfair Display',serif;">"</div>
+          <p class="italic mb-6 force-wrap leading-relaxed" style="color:var(--text-m);">They scaled our ad spend efficiently and delivered a <strong style="color:var(--dark);">5x ROI in Q3</strong>. Best agency decision we've made.</p>
+          <p class="font-semibold text-sm" style="color:var(--wine);">— Michael B., Marketing Director</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================
+     CASE STUDIES
+============================ -->
+<section id="portfolio" class="py-24 md:py-36" style="background:var(--bg);">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="text-center mb-14">
+      <span class="section-label">Our Work</span>
+      <h2 class="text-4xl md:text-5xl tracking-tight" style="color:var(--dark);">Recent Results. Proven Impact.</h2>
+    </div>
+    <div class="scroll-fade">
+      <div class="h-scroll md:grid-cols-3 gap-8">
+        <div class="h-scroll-item card border overflow-hidden cursor-pointer group" style="border-color:var(--border);" onclick="openModal('modal-1')">
+          <div class="relative overflow-hidden h-52"><img src="https://placehold.co/400x250/F9F0F2/6E2233?text=Brand+A" alt="Project A" class="w-full h-full object-cover transition duration-500 group-hover:scale-105" width="400" height="250" loading="lazy"></div>
+          <div class="p-6 text-center">
+            <h3 class="text-4xl font-black mb-1" style="color:var(--wine);">+200%</h3>
+            <p class="font-semibold mb-2" style="color:var(--dark);">Engagement Growth</p>
+            <p class="text-sm force-wrap" style="color:var(--text-m);">Brand A: Social media and content strategy overhaul.</p>
+            <p class="text-sm font-semibold mt-4" style="color:var(--wine);">View Case Study →</p>
+          </div>
+        </div>
+        <div class="h-scroll-item card border overflow-hidden cursor-pointer group" style="border-color:var(--border);" onclick="openModal('modal-2')">
+          <div class="relative overflow-hidden h-52"><img src="https://placehold.co/400x250/F9F0F2/6E2233?text=Brand+B" alt="Project B" class="w-full h-full object-cover transition duration-500 group-hover:scale-105" width="400" height="250" loading="lazy"></div>
+          <div class="p-6 text-center">
+            <h3 class="text-4xl font-black mb-1" style="color:var(--wine);">3X</h3>
+            <p class="font-semibold mb-2" style="color:var(--dark);">Website Leads</p>
+            <p class="text-sm force-wrap" style="color:var(--text-m);">Brand B: New landing page design and lead magnet funnel.</p>
+            <p class="text-sm font-semibold mt-4" style="color:var(--wine);">View Case Study →</p>
+          </div>
+        </div>
+        <div class="h-scroll-item card border overflow-hidden cursor-pointer group" style="border-color:var(--border);" onclick="openModal('modal-3')">
+          <div class="relative overflow-hidden h-52"><img src="https://placehold.co/400x250/F9F0F2/6E2233?text=Brand+C" alt="Project C" class="w-full h-full object-cover transition duration-500 group-hover:scale-105" width="400" height="250" loading="lazy"></div>
+          <div class="p-6 text-center">
+            <h3 class="text-4xl font-black mb-1" style="color:var(--wine);">10K+</h3>
+            <p class="font-semibold mb-2" style="color:var(--dark);">YouTube Subscribers</p>
+            <p class="text-sm force-wrap" style="color:var(--text-m);">Brand C: Video content strategy and channel optimization.</p>
+            <p class="text-sm font-semibold mt-4" style="color:var(--wine);">View Case Study →</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-12">
+      <a href="portfolio.html" class="btn-secondary text-sm px-8">See Full Portfolio</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================
+     CTA BANNER
+============================ -->
+<section id="contact" class="py-24 md:py-36 relative overflow-hidden" style="background:var(--wine);">
+  <div class="absolute top-0 left-0 w-72 h-72 rounded-full -translate-x-1/2 -translate-y-1/2" style="background:rgba(255,255,255,.07);filter:blur(60px);"></div>
+  <div class="absolute bottom-0 right-0 w-96 h-96 rounded-full translate-x-1/2 translate-y-1/2" style="background:rgba(255,255,255,.05);filter:blur(80px);"></div>
+  <div class="max-w-4xl mx-auto px-5 sm:px-8 text-center relative z-10">
+    <h2 class="text-4xl md:text-6xl text-white tracking-tight mb-6 leading-tight">Ready to make your brand <em>thrive?</em></h2>
+    <p class="text-white/70 text-lg md:text-xl mb-10 font-light max-w-xl mx-auto">Let's discuss your project and outline a clear path to measurable, sustainable growth.</p>
+    <a href="#contact-form" class="inline-flex items-center gap-2 px-10 py-4 text-base font-semibold bg-white rounded-xl hover:bg-gray-50 transition shadow-xl" style="color:var(--wine);">
+      Fill In The Contact Form
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+    </a>
+  </div>
+</section>
+
+
+<!-- ============================
+     CONTACT FORM
+============================ -->
+<section id="contact-form" class="py-24 md:py-36" style="background:var(--bg-off);">
+  <div class="max-w-2xl mx-auto px-5 sm:px-8">
+    <div class="text-center mb-12">
+      <span class="section-label">Get In Touch</span>
+      <h2 class="text-4xl md:text-5xl tracking-tight mb-4" style="color:var(--dark);">Let's Start a Conversation</h2>
+      <p class="leading-relaxed" style="color:var(--text-m);">Fill in the form below — when you click Send, your email app will open with everything pre-filled and ready to go.</p>
+    </div>
+    <div class="card p-8 md:p-10 border" style="border-color:var(--border);">
+      <div style="display:flex;flex-direction:column;gap:1.2rem;">
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div>
+            <label class="form-label" for="cf-name">Your Name</label>
+            <input id="cf-name" type="text" class="form-field" placeholder="Alex Johnson" autocomplete="name">
+          </div>
+          <div>
+            <label class="form-label" for="cf-company">Company / Brand</label>
+            <input id="cf-company" type="text" class="form-field" placeholder="Acme Co." autocomplete="organization">
+          </div>
+        </div>
+        <div>
+          <label class="form-label" for="cf-email">Your Email</label>
+          <input id="cf-email" type="email" class="form-field" placeholder="you@example.com" autocomplete="email">
+        </div>
+        <div>
+          <label class="form-label" for="cf-service">Service You're Interested In</label>
+          <select id="cf-service" class="form-field">
+            <option value="">— Select a service —</option>
+            <option>Digital Growth</option>
+            <option>Brand & Design</option>
+            <option>Content & Video</option>
+            <option>SEO & Analytics</option>
+            <option>Game Solutions</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label" for="cf-message">Tell Us About Your Project</label>
+          <textarea id="cf-message" class="form-field" placeholder="What are you working on? What's your goal?"></textarea>
+        </div>
+        <button onclick="sendMailto()" class="btn-primary w-full text-base mt-1">
+          <i class="fas fa-paper-plane mr-2"></i>Send Message
+        </button>
+        <p class="text-xs text-center" style="color:var(--text-m);">Opens your email app with your message pre-filled. No data is stored on this website.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================
+     FOOTER
+============================ -->
+<footer style="background:#0e0e0e;" class="text-white pt-16 pb-10">
+  <div class="max-w-7xl mx-auto px-5 sm:px-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-10 mb-12">
+      <div class="col-span-2 md:col-span-1">
+        <h3 class="text-2xl font-black mb-3" style="font-family:'Playfair Display',serif;color:var(--wine);">Thrive & Co.</h3>
+        <p class="text-gray-400 text-sm mb-4 leading-relaxed">Helping ambitious brands grow through strategy, design, and content.</p>
+        <p class="text-gray-400 text-sm">hello@thriveandco.com</p>
+        <p class="text-gray-400 text-sm">+234 XXXX XXXX</p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-sm mb-5 uppercase tracking-wider">Quick Links</h4>
+        <ul class="space-y-3 text-sm">
+          <li><a href="#home"          class="text-gray-400 hover:text-white transition">Home</a></li>
+          <li><a href="#about"         class="text-gray-400 hover:text-white transition">About</a></li>
+          <li><a href="#services"      class="text-gray-400 hover:text-white transition">Services</a></li>
+          <li><a href="portfolio.html" class="text-gray-400 hover:text-white transition">Portfolio</a></li>
+          <li><a href="#contact-form"  class="text-gray-400 hover:text-white transition">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold text-sm mb-5 uppercase tracking-wider">Services</h4>
+        <ul class="space-y-3 text-sm">
+          <li><a href="#services"            class="text-gray-400 hover:text-white transition">Digital Growth</a></li>
+          <li><a href="#services"            class="text-gray-400 hover:text-white transition">Brand & Design</a></li>
+          <li><a href="#services"            class="text-gray-400 hover:text-white transition">Content & Video</a></li>
+          <li><a href="#services"            class="text-gray-400 hover:text-white transition">SEO & Analytics</a></li>
+          <li><a href="portfolio.html#games" class="text-gray-400 hover:text-white transition">Game Solutions</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold text-sm mb-5 uppercase tracking-wider">Connect</h4>
+        <div class="flex gap-4 mb-6">
+          <a href="#" class="text-gray-400 hover:text-white transition text-xl" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="text-gray-400 hover:text-white transition text-xl" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="text-gray-400 hover:text-white transition text-xl" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" class="text-gray-400 hover:text-white transition text-xl" title="TikTok"><i class="fab fa-tiktok"></i></a>
+        </div>
+        <a href="#contact-form" class="btn-primary text-sm px-5 py-2.5">Work With Us</a>
+      </div>
+    </div>
+    <div style="border-top:1px solid #1e1e1e;padding-top:2rem;">
+      <p class="text-center text-xs text-gray-500">&copy; 2025 Thrive & Co. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ============================
+     MODALS
+============================ -->
+<div id="modal-1" class="modal" role="dialog" aria-modal="true" aria-labelledby="m1t">
+  <div class="modal-content">
+    <div class="modal-handle"></div>
+    <button class="modal-close-btn" onclick="closeModal('modal-1')" aria-label="Close">×</button>
+    <span class="section-label">Case Study</span>
+    <h3 id="m1t" class="text-2xl md:text-3xl font-bold mb-5" style="color:var(--wine);">Project Alpha: Social Engagement Blast</h3>
+    <img src="https://placehold.co/600x300/F9F0F2/6E2233?text=Brand+A" alt="Brand A" class="w-full h-auto rounded-xl mb-6" width="600" height="300" loading="lazy">
+    <p class="mb-4 leading-relaxed" style="color:var(--text);"><strong>Client Challenge:</strong> Brand A struggled with low visibility and stagnant social engagement despite an innovative product line.</p>
+    <p class="mb-4 leading-relaxed" style="color:var(--text);"><strong>Our Approach:</strong> Interactive reels, influencer collaborations, community management, and targeted ad campaigns.</p>
+    <p class="mb-6 leading-relaxed" style="color:var(--text);"><strong>Results:</strong> <strong style="color:var(--wine);">+200% engagement</strong> in 60 days, 150% follower growth, major boost in referral traffic.</p>
+    <p class="text-sm italic border-l-4 pl-4" style="color:var(--text-m);border-color:var(--wine);">"Thrive & Co. completely transformed our online presence. Flawless execution." — CEO, Brand Alpha</p>
+  </div>
+</div>
+
+<div id="modal-2" class="modal" role="dialog" aria-modal="true" aria-labelledby="m2t">
+  <div class="modal-content">
+    <div class="modal-handle"></div>
+    <button class="modal-close-btn" onclick="closeModal('modal-2')" aria-label="Close">×</button>
+    <span class="section-label">Case Study</span>
+    <h3 id="m2t" class="text-2xl md:text-3xl font-bold mb-5" style="color:var(--wine);">Project Beta: Lead Generation Mastery</h3>
+    <img src="https://placehold.co/600x300/F9F0F2/6E2233?text=Brand+B" alt="Brand B" class="w-full h-auto rounded-xl mb-6" width="600" height="300" loading="lazy">
+    <p class="mb-4 leading-relaxed" style="color:var(--text);"><strong>Client Challenge:</strong> Brand B's SaaS couldn't convert visitors into qualified leads.</p>
+    <p class="mb-4 leading-relaxed" style="color:var(--text);"><strong>Our Approach:</strong> Landing page redesign, lead magnets, email automation, and LinkedIn ad campaigns.</p>
+    <p class="mb-6 leading-relaxed" style="color:var(--text);"><strong>Results:</strong> <strong style="color:var(--wine);">3X qualified leads</strong> in three months, 30% lower cost-per-lead.</p>
+    <p class="text-sm italic border-l-4 pl-4" style="color:var(--text-m);border-color:var(--wine);">"Thrive & Co. truly understands B2B lead generation." — Founder, Brand Beta</p>
+  </div>
+</div>
+
+<div id="modal-3" class="modal" role="dialog" aria-modal="true" aria-labelledby="m3t">
+  <div class="modal-content">
+    <div class="modal-handle"></div>
+    <button class="modal-close-btn" onclick="closeModal('modal-3')" aria-label="Close">×</button>
+    <span class="section-label">Case Study</span>
+    <h3 id="m3t" class="text-2xl md:text-3xl font-bold mb-5" style="color:var(--wine);">Project Gamma: YouTube Channel Growth</h3>
+    <img src="https://placehold.co/600x300/F9F0F2/6E2233?text=Brand+C" alt="Brand C" class="w-full h-auto rounded-xl mb-6" width="600" height="300" loading="lazy">
+    <p class="mb-4 leading-relaxed" style="color:var(--text);"><strong>Client Challenge:</strong> Brand C couldn't gain YouTube traction despite strong content ideas.</p>
+    <p class="mb-4 leading-relaxed" style="color:var(--text);"><strong>Our Approach:</strong> Full YouTube strategy — keyword research, scripting, thumbnail systems, watch-time optimization.</p>
+    <p class="mb-6 leading-relaxed" style="color:var(--text);"><strong>Results:</strong> <strong style="color:var(--wine);">10,000 subscribers in two months</strong>, +40% watch time.</p>
+    <p class="text-sm italic border-l-4 pl-4" style="color:var(--text-m);border-color:var(--wine);">"Our YouTube channel exploded. Their expertise is unmatched." — Marketing Lead, Brand Gamma</p>
+  </div>
+</div>
+
+
+<!-- ============================
+     SCRIPTS
+============================ -->
+<script>
+// ── DARK MODE ─────────────────────────────────────────────
+const html = document.documentElement;
+const saved = localStorage.getItem('tc-theme') || 'light';
+html.setAttribute('data-theme', saved);
+syncIcons(saved);
+
+function toggleTheme() {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('tc-theme', next);
+    syncIcons(next);
+}
+function syncIcons(t) {
+    ['icon-desk','icon-mob'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.className = t === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    });
+}
+document.getElementById('dark-desk').addEventListener('click', toggleTheme);
+document.getElementById('dark-mob').addEventListener('click', toggleTheme);
+
+// ── NAV SCROLL BEHAVIOUR ──────────────────────────────────
+const nav = document.getElementById('main-nav');
+let lastY = 0, ticking = false;
+
+function onScroll() {
+    const y = window.scrollY;
+    // Solid vs transparent
+    nav.classList.toggle('scrolled', y > 30);
+    // Hide/show
+    if (y > lastY && y > 100) {
+        nav.classList.add('nav-hidden');
+    } else {
+        nav.classList.remove('nav-hidden');
+    }
+    lastY = Math.max(y, 0);
+    ticking = false;
+}
+window.addEventListener('scroll', () => {
+    if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
+}, { passive: true });
+
+// ── MOBILE DRAWER ─────────────────────────────────────────
+const overlay    = document.getElementById('drawer-overlay');
+const drawer     = document.getElementById('mobile-drawer');
+const openBtn    = document.getElementById('mob-menu-btn');
+const closeBtn   = document.getElementById('d-close-btn');
+let touchStartX  = 0;
+
+function openDrawer()  {
+    overlay.classList.add('open');
+    drawer.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    openBtn.setAttribute('aria-expanded','true');
+}
+function closeDrawer() {
+    overlay.classList.remove('open');
+    drawer.classList.remove('open');
+    document.body.style.overflow = '';
+    openBtn.setAttribute('aria-expanded','false');
+}
+
+openBtn.addEventListener('click', openDrawer);
+closeBtn.addEventListener('click', closeDrawer);
+overlay.addEventListener('click', closeDrawer);
+drawer.querySelectorAll('.d-link, .btn-primary').forEach(el => el.addEventListener('click', closeDrawer));
+
+// Swipe right → close
+drawer.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+drawer.addEventListener('touchend',   e => { if (e.changedTouches[0].clientX - touchStartX > 60) closeDrawer(); }, { passive: true });
+
+// ── MODALS ────────────────────────────────────────────────
+function openModal(id) {
+    const m = document.getElementById(id);
+    if (!m) return;
+    m.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    const f = m.querySelector('button,[href]');
+    if (f) setTimeout(() => f.focus(), 50);
+}
+function closeModal(id) {
+    const m = document.getElementById(id);
+    if (!m) return;
+    m.classList.remove('active');
+    document.body.style.overflow = '';
+}
+document.querySelectorAll('.modal').forEach(m => {
+    m.addEventListener('click', e => { if (e.target === m) closeModal(m.id); });
+});
+document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    closeDrawer();
+    document.querySelectorAll('.modal.active').forEach(m => closeModal(m.id));
+});
+
+// ── MAILTO FORM ───────────────────────────────────────────
+function sendMailto() {
+    const name    = document.getElementById('cf-name').value.trim();
+    const company = document.getElementById('cf-company').value.trim();
+    const replyTo = document.getElementById('cf-email').value.trim();
+    const service = document.getElementById('cf-service').value;
+    const message = document.getElementById('cf-message').value.trim();
+
+    if (!name || !replyTo || !message) {
+        alert('Please fill in your name, email, and message before sending.');
+        return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(replyTo)) {
+        alert('Please enter a valid email address.');
+        return;
+    }
+
+    const subject = encodeURIComponent(`Enquiry from ${name}${company ? ' – ' + company : ''}`);
+    const body = encodeURIComponent(
+`Hi Thrive & Co.,
+
+My name is ${name}${company ? ', from ' + company : ''}.
+Reply to me at: ${replyTo}
+Service I'm interested in: ${service || 'Not specified'}
+
+${message}
+
+Looking forward to hearing from you!
+— ${name}`);
+
+    // ↓↓ Replace with your actual email address ↓↓
+    window.location.href = `mailto:hello@thriveandco.com?subject=${subject}&body=${body}`;
+}
+</script>
+</body>
+</html>
