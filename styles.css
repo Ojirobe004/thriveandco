@@ -237,9 +237,9 @@ body.menu-open .nav {
     radial-gradient(circle at 88% 0%, rgba(110, 34, 51, 0.17), transparent 26%),
     linear-gradient(180deg, #fbf7f4 0%, #fff 70%);
 }
-/* PLACEHOLDER: add your mobile hero image here. Example:
-   @media (max-width: 767px) { .hero { background-image: linear-gradient(...), url('images/your-mobile-hero.jpg'); } }
-*/
+/* PLACEHOLDER: add your mobile hero image here. Example: */
+   /* @media (max-width: 767px) { .hero { background-image: linear-gradient(...), url('../images/11.jpg'); } } */
+
 [data-theme="dark"] .hero { background: radial-gradient(circle at 15% 8%, rgba(216,162,79,0.14), transparent 28%), radial-gradient(circle at 88% 0%, rgba(110,34,51,0.28), transparent 26%), #0b0d12; }
 .hero-grid { display: grid; gap: 30px; align-items: center; }
 .eyebrow {
@@ -565,7 +565,7 @@ body.menu-open .nav {
 @media (max-width: 767px) {
   .hero {
     /* MOBILE HERO BACKGROUND PLACEHOLDER: recommended 900x1400 portrait or 4:5 image with calm space behind text. */
-    /* --hero-mobile-image: url('images/hero-mobile.jpg'); */
+    --hero-mobile-image: url('../images/11.jpg');
     background-image:
       var(--hero-mobile-image, none),
       radial-gradient(circle at 15% 8%, rgba(216, 162, 79, 0.2), transparent 28%),
