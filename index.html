@@ -6,12 +6,16 @@
   <title>Thrive & Co. | Growth, Content, and Game Studio Marketing</title>
   <meta name="description" content="Thrive & Co. helps ambitious brands and game studios grow with strategy, content, launch marketing, design, and performance systems.">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%236e2233'/%3E%3Cpath d='M18 17h28v8H36v24h-8V25H18z' fill='white'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="site-shell">
-  <nav class="nav" aria-label="Main navigation">
+  <nav class="nav" aria-label="Main navigation" data-nav>
     <div class="container nav-inner">
       <a class="brand" href="index.html" aria-label="Thrive and Co. home">
         <span class="brand-mark">T</span>
@@ -25,22 +29,35 @@
         <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme"><span class="theme-icon" aria-hidden="true"></span><span data-theme-label>Dark</span></button>
         <a class="btn btn-brand" href="#contact">Book Free Audit</a>
       </div>
-      <button class="menu-toggle" type="button" data-menu-button aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-menu">
-        <span class="hamburger">Menu</span>
-        <span class="close">Close</span>
+      <button class="menu-toggle" type="button" data-menu-button aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
     </div>
-    <div class="mobile-panel" id="mobile-menu" data-mobile-panel>
-      <div class="container">
-        <a href="index.html">Home</a>
-        <a href="#services">Services</a>
-        <a href="#process">Process</a>
-        <a href="portfolio.html">Portfolio</a>
-        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme"><span class="theme-icon" aria-hidden="true"></span><span data-theme-label>Dark mode</span></button>
-        <a href="#contact">Book Free Audit</a>
-      </div>
-    </div>
   </nav>
+  <div class="drawer-overlay" data-drawer-overlay></div>
+  <aside class="mobile-drawer" id="mobile-menu" data-mobile-drawer aria-hidden="true">
+    <div class="drawer-head">
+      <a class="brand" href="index.html" aria-label="Thrive and Co. home">
+        <span class="brand-mark">T</span>
+        <span>Thrive & Co.</span>
+      </a>
+      <button class="drawer-close" type="button" data-drawer-close aria-label="Close navigation menu">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="drawer-links">
+      <a href="index.html">Home <span>01</span></a>
+      <a href="#services">Services <span>02</span></a>
+      <a href="#process">Process <span>03</span></a>
+      <a href="portfolio.html">Portfolio <span>04</span></a>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme"><span class="theme-icon" aria-hidden="true"></span><span data-theme-label>Dark mode</span></button>
+      <a href="#contact">Book Free Audit <span>→</span></a>
+    </div>
+    <p class="drawer-note">Swipe right, tap outside, or use the close button to dismiss this menu.</p>
+  </aside>
+
+  <!-- MOBILE THEME TOGGLE: fixed-position button so dark/light mode is always reachable on phones. -->
+  <button class="theme-toggle theme-fab" type="button" data-theme-toggle aria-label="Switch color theme"><span class="theme-icon" aria-hidden="true"></span><span class="sr-only" data-theme-label>Dark mode</span></button>
 
   <main id="main">
     <section class="hero" id="home">
@@ -162,28 +179,35 @@
           <h2 class="section-title">Built for the scroll, the pitch, and the launch day.</h2>
         </div>
         <div class="cards-scroll grid cols-3">
-          <article class="card case-card">
+          <!-- CASE STUDY MODAL TRIGGER: update copy/metrics here and the matching modal near the bottom of this file. -->
+          <article class="card case-card" role="button" tabindex="0" data-modal-open="modal-project-1">
             <div class="media-tile social"><span class="media-caption">Social growth system</span></div>
             <div class="case-body">
               <div class="case-metric">+200%</div>
               <h3>Engagement lift in 60 days</h3>
               <p>A content reset with sharper hooks, better creative rhythm, and paid amplification.</p>
+              <!-- CASE STUDY LINK PLACEHOLDER: replace # with a full case study URL if you prefer navigation instead of modal expansion. -->
+              <a class="case-link" href="#" data-modal-open="modal-project-1">View Full Case Study →</a>
             </div>
           </article>
-          <article class="card case-card">
+          <article class="card case-card" role="button" tabindex="0" data-modal-open="modal-project-2">
             <div class="media-tile branding"><span class="media-caption">Conversion redesign</span></div>
             <div class="case-body">
               <div class="case-metric">3.4x</div>
               <h3>More qualified leads</h3>
               <p>A new landing page and offer path built around faster trust and cleaner decisions.</p>
+              <!-- CASE STUDY LINK PLACEHOLDER: replace # with a full case study URL if you prefer navigation instead of modal expansion. -->
+              <a class="case-link" href="#" data-modal-open="modal-project-2">View Full Case Study →</a>
             </div>
           </article>
-          <article class="card case-card">
+          <article class="card case-card" role="button" tabindex="0" data-modal-open="modal-project-3">
             <div class="media-tile games"><span class="media-caption">Game launch campaign</span></div>
             <div class="case-body">
               <div class="case-metric">8K</div>
               <h3>Steam wishlists pre-launch</h3>
               <p>A twelve-week content, creator, and community runway for an indie RPG.</p>
+              <!-- CASE STUDY LINK PLACEHOLDER: replace # with a full case study URL if you prefer navigation instead of modal expansion. -->
+              <a class="case-link" href="#" data-modal-open="modal-project-3">View Full Case Study →</a>
             </div>
           </article>
         </div>
@@ -219,21 +243,39 @@
     <section class="section" id="testimonials">
       <div class="container">
         <div class="section-head center">
-          <span class="eyebrow">Social proof</span>
-          <h2 class="section-title">Clearer brands. Faster decisions. Better launches.</h2>
+          <span class="eyebrow">Social Proof</span>
+          <h2 class="section-title">Client Success Stories</h2>
         </div>
         <div class="cards-scroll grid cols-3">
           <article class="card testimonial">
-            <p>"The strategy finally made our content feel intentional. We stopped posting randomly and started seeing qualified conversations every week."</p>
-            <div class="person">Founder, consumer brand</div>
+            <div class="quote-mark">&quot;</div>
+            <p>Thrive & Co. helped us <strong>triple engagement in 60 days</strong>. Clear strategy, excellent execution. Genuinely transformative for our brand.</p>
+            <div class="person">Client Name, CEO of Tech Start-up</div>
           </article>
           <article class="card testimonial">
-            <p>"The landing page work immediately improved lead quality. It felt premium without losing the personality of the company."</p>
-            <div class="person">Growth lead, SaaS team</div>
+            <div class="quote-mark">&quot;</div>
+            <p>Our new website design immediately improved lead quality. They nailed the branding; it feels premium but completely us.</p>
+            <div class="person">Jane Doe, Founder & Creator</div>
           </article>
           <article class="card testimonial">
-            <p>"They understood game communities quickly. Our launch plan became clearer, stronger, and much easier to execute."</p>
-            <div class="person">Indie studio director</div>
+            <div class="quote-mark">&quot;</div>
+            <p>The team scaled our ad spend efficiently and delivered a phenomenal <strong>5x ROI in Q3</strong>. Best agency decision we've made.</p>
+            <div class="person">Michael B., Marketing Director</div>
+          </article>
+          <!-- TEMPORARY REVIEW IMAGE: replace src with a real Fiverr review screenshot. -->
+          <article class="card testimonial image-review">
+            <img src="https://placehold.co/640x420/f9f0f2/6E2233?text=Fiverr+Review+Screenshot" alt="Fiverr review screenshot" loading="lazy" width="640" height="420">
+            <div class="person">Fiverr Review Screenshot</div>
+          </article>
+          <!-- TEMPORARY REVIEW IMAGE: replace src with a real Upwork review screenshot. -->
+          <article class="card testimonial image-review">
+            <img src="https://placehold.co/640x420/f8f7f5/6E2233?text=Upwork+Review+Screenshot" alt="Upwork review screenshot" loading="lazy" width="640" height="420">
+            <div class="person">Upwork Review Screenshot</div>
+          </article>
+          <!-- TEMPORARY REVIEW IMAGE: replace src with another real marketplace/client review screenshot. -->
+          <article class="card testimonial image-review">
+            <img src="https://placehold.co/640x420/f9f0f2/6E2233?text=Client+Review+Screenshot" alt="Client review screenshot" loading="lazy" width="640" height="420">
+            <div class="person">Client Review Screenshot</div>
           </article>
         </div>
       </div>
@@ -249,6 +291,75 @@
         <a class="btn btn-soft" href="mailto:hello@thriveandco.com?subject=Free%20Growth%20Audit%20Request">Book Your Free Audit</a>
       </div>
     </section>
+
+
+    <section class="section" id="contact-form">
+      <div class="container">
+        <div class="section-head center">
+          <span class="eyebrow">Send a Brief</span>
+          <h2 class="section-title">Tell us what you are building.</h2>
+          <p class="section-copy">Fill out the form below and hit Send — it'll open your email client with everything pre-filled, ready to go.</p>
+        </div>
+        <div class="card contact-form-card">
+          <!-- MAILTO FORM: replace data-recipient with the real destination email address. No backend is required. -->
+          <form data-mailto-form data-recipient="hello@thriveandco.com">
+            <div class="form-grid">
+              <div class="form-field">
+                <label for="contact-name">Name</label>
+                <input id="contact-name" name="name" type="text" placeholder="Your name" autocomplete="name" required>
+              </div>
+              <div class="form-field">
+                <label for="contact-email">Email</label>
+                <input id="contact-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+              </div>
+              <div class="form-field full">
+                <label for="contact-subject">Subject</label>
+                <input id="contact-subject" name="subject" type="text" placeholder="Growth audit request" required>
+              </div>
+              <div class="form-field full">
+                <label for="contact-message">Message</label>
+                <textarea id="contact-message" name="message" placeholder="Tell us about the brand, campaign, or game launch you want help with." required></textarea>
+              </div>
+            </div>
+            <button class="btn btn-brand" type="submit">Send via Email</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  <!-- CASE STUDY MODALS: replace these placeholder visuals and names with your real client screenshots/details. -->
+  <div class="modal" id="modal-project-1" role="dialog" aria-modal="true" aria-labelledby="modal1-title">
+    <div class="modal-content">
+      <button class="modal-close" type="button" data-modal-close aria-label="Close case study">×</button>
+      <span class="eyebrow">Case Study</span>
+      <h3 id="modal1-title">Project Alpha: Social Engagement Blast</h3>
+      <div class="modal-visual media-tile social" aria-label="Placeholder for Brand Alpha case study image"></div>
+      <p><strong>Client Challenge:</strong> Brand Alpha had strong products but low social visibility and inconsistent engagement.</p>
+      <p><strong>Our Approach:</strong> We rebuilt the content calendar around reels, proof-led posts, creator collaborations, and paid amplification.</p>
+      <p><strong>Results:</strong> Engagement increased by <strong>+200%</strong> in 60 days with stronger referral traffic and a cleaner brand presence.</p>
+    </div>
+  </div>
+  <div class="modal" id="modal-project-2" role="dialog" aria-modal="true" aria-labelledby="modal2-title">
+    <div class="modal-content">
+      <button class="modal-close" type="button" data-modal-close aria-label="Close case study">×</button>
+      <span class="eyebrow">Case Study</span>
+      <h3 id="modal2-title">Project Beta: Lead Generation Mastery</h3>
+      <div class="modal-visual media-tile branding" aria-label="Placeholder for Brand Beta case study image"></div>
+      <p><strong>Client Challenge:</strong> Brand Beta needed more qualified leads, but their old page was unclear and slow to build trust.</p>
+      <p><strong>Our Approach:</strong> We redesigned the landing flow, tightened the offer, and created a conversion path with stronger proof.</p>
+      <p><strong>Results:</strong> Qualified leads grew by <strong>3.4x</strong> while the team got a sharper page to support paid campaigns.</p>
+    </div>
+  </div>
+  <div class="modal" id="modal-project-3" role="dialog" aria-modal="true" aria-labelledby="modal3-title">
+    <div class="modal-content">
+      <button class="modal-close" type="button" data-modal-close aria-label="Close case study">×</button>
+      <span class="eyebrow">Case Study</span>
+      <h3 id="modal3-title">Project Gamma: Game Launch Runway</h3>
+      <div class="modal-visual media-tile games" aria-label="Placeholder for game launch case study image"></div>
+      <p><strong>Client Challenge:</strong> A small studio needed players aware of the game before launch day, not after.</p>
+      <p><strong>Our Approach:</strong> We built a 12-week wishlist, creator outreach, and community rhythm around the game hook.</p>
+      <p><strong>Results:</strong> The campaign drove <strong>8K Steam wishlists</strong> before launch and gave the studio a repeatable release system.</p>
+    </div>
+  </div>
   </main>
 
   <footer class="footer">
@@ -280,10 +391,11 @@
         <div>
           <h4>Connect</h4>
           <div class="social-links">
-            <a href="#" aria-label="Instagram">Ig</a>
-            <a href="#" aria-label="LinkedIn">In</a>
-            <a href="#" aria-label="TikTok">Tk</a>
-            <a href="#" aria-label="WhatsApp">Wa</a>
+            <!-- SOCIAL LINKS: replace # with the real profile URLs. -->
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
           </div>
         </div>
       </div>
@@ -294,5 +406,3 @@
 <script src="script.js"></script>
 </body>
 </html>
-
-

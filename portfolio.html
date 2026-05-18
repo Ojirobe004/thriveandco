@@ -6,12 +6,16 @@
   <title>Portfolio | Thrive & Co.</title>
   <meta name="description" content="Explore Thrive & Co. portfolio work across social media growth, content systems, indie game launches, and studio marketing.">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%236e2233'/%3E%3Cpath d='M18 17h28v8H36v24h-8V25H18z' fill='white'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="site-shell">
-  <nav class="nav" aria-label="Main navigation">
+  <nav class="nav" aria-label="Main navigation" data-nav>
     <div class="container nav-inner">
       <a class="brand" href="index.html" aria-label="Thrive and Co. home">
         <span class="brand-mark">T</span>
@@ -20,29 +24,40 @@
       <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="index.html#services">Services</a>
+        <a href="index.html#process">Process</a>
         <a class="active" href="portfolio.html">Portfolio</a>
-        <a href="#social">Social Media</a>
-        <a href="#games">Game Studios</a>
         <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme"><span class="theme-icon" aria-hidden="true"></span><span data-theme-label>Dark</span></button>
         <a class="btn btn-brand" href="index.html#contact">Book Free Audit</a>
       </div>
-      <button class="menu-toggle" type="button" data-menu-button aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-menu">
-        <span class="hamburger">Menu</span>
-        <span class="close">Close</span>
+      <button class="menu-toggle" type="button" data-menu-button aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
     </div>
-    <div class="mobile-panel" id="mobile-menu" data-mobile-panel>
-      <div class="container">
-        <a href="index.html">Home</a>
-        <a href="index.html#services">Services</a>
-        <a href="portfolio.html">Portfolio</a>
-        <a href="#social">Social Media</a>
-        <a href="#games">Game Studios</a>
-        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme"><span class="theme-icon" aria-hidden="true"></span><span data-theme-label>Dark mode</span></button>
-        <a href="index.html#contact">Book Free Audit</a>
-      </div>
-    </div>
   </nav>
+  <div class="drawer-overlay" data-drawer-overlay></div>
+  <aside class="mobile-drawer" id="mobile-menu" data-mobile-drawer aria-hidden="true">
+    <div class="drawer-head">
+      <a class="brand" href="index.html" aria-label="Thrive and Co. home">
+        <span class="brand-mark">T</span>
+        <span>Thrive & Co.</span>
+      </a>
+      <button class="drawer-close" type="button" data-drawer-close aria-label="Close navigation menu">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="drawer-links">
+      <a href="index.html">Home <span>01</span></a>
+      <a href="index.html#services">Services <span>02</span></a>
+      <a href="index.html#process">Process <span>03</span></a>
+      <a href="portfolio.html">Portfolio <span>04</span></a>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme"><span class="theme-icon" aria-hidden="true"></span><span data-theme-label>Dark mode</span></button>
+      <a href="index.html#contact">Book Free Audit <span>→</span></a>
+    </div>
+    <p class="drawer-note">Swipe right, tap outside, or use the close button to dismiss this menu.</p>
+  </aside>
+
+  <!-- MOBILE THEME TOGGLE: fixed-position button so dark/light mode is always reachable on phones. -->
+  <button class="theme-toggle theme-fab" type="button" data-theme-toggle aria-label="Switch color theme"><span class="theme-icon" aria-hidden="true"></span><span class="sr-only" data-theme-label>Dark mode</span></button>
 
   <main id="main">
     <section class="page-hero">
@@ -111,6 +126,7 @@
             <h3>Full social media portfolio</h3>
             <p>Add your Google Drive link to this button when the deck or folder is ready.</p>
           </div>
+          <!-- GOOGLE DRIVE LINK: replace # with the full Social Media portfolio folder/deck URL. -->
           <a class="btn btn-brand" href="#">View Full Social Portfolio</a>
         </div>
       </div>
@@ -170,6 +186,7 @@
             <h3>Full game studio portfolio</h3>
             <p>Add your Google Drive link here when you are ready to publish the full work folder.</p>
           </div>
+          <!-- GOOGLE DRIVE LINK: replace # with the full Game Studio portfolio folder/deck URL. -->
           <a class="btn btn-soft" href="#">View Full Game Portfolio</a>
         </div>
       </div>
@@ -216,10 +233,11 @@
         <div>
           <h4>Connect</h4>
           <div class="social-links">
-            <a href="#" aria-label="Instagram">Ig</a>
-            <a href="#" aria-label="LinkedIn">In</a>
-            <a href="#" aria-label="TikTok">Tk</a>
-            <a href="#" aria-label="WhatsApp">Wa</a>
+            <!-- SOCIAL LINKS: replace # with the real profile URLs. -->
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
           </div>
         </div>
       </div>
@@ -230,5 +248,11 @@
 <script src="script.js"></script>
 </body>
 </html>
+
+
+
+
+
+
 
 
