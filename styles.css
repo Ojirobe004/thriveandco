@@ -337,6 +337,7 @@ body.menu-open .nav {
 .service-card p, .case-card p, .testimonial p { margin: 0; color: var(--muted); line-height: 1.65; font-size: 0.96rem; }
 .service-link { display: inline-flex; margin-top: 20px; color: var(--wine); font-weight: 800; font-size: 0.9rem; }
 .media-tile { height: 164px; position: relative; overflow: hidden; background: linear-gradient(135deg, #fbebee, #fff8ef 55%, #f8f7f5); }
+.media-tile.has-image { height: 200px; background: #000; }
 .media-tile.social { background: linear-gradient(135deg, #fbebee, #fff8ef 55%, #f8f7f5); }
 .media-tile.games { background: radial-gradient(circle at 28% 22%, rgba(216,162,79,0.28), transparent 25%), radial-gradient(circle at 82% 72%, rgba(110,34,51,0.38), transparent 28%), linear-gradient(135deg, #09090d, #22131a); }
 .media-tile.branding { background: linear-gradient(135deg, #fbf1f3, #f8f7f5); }
