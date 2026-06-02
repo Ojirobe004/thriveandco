@@ -1,0 +1,12 @@
+# robots.txt — Thrive & Co.
+# https://thriveandco.site
+
+User-agent: *
+Allow: /
+
+# Block crawlers from internal/dev paths if you add them later
+# Disallow: /admin/
+# Disallow: /drafts/
+
+# Sitemap location
+Sitemap: https://thriveandco.site/sitemap.xml

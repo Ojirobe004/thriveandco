@@ -3,9 +3,95 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio | Thrive & Co.</title>
-  <meta name="description" content="Explore Thrive & Co. portfolio work across social media growth, content systems, indie game launches, and studio marketing.">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%236e2233'/%3E%3Cpath d='M18 17h28v8H36v24h-8V25H18z' fill='white'/%3E%3C/svg%3E">
+
+  <!-- ═══════════════════════════════════════════
+       PRIMARY SEO
+  ═══════════════════════════════════════════ -->
+  <title>Portfolio | Thrive & Co. — Social Media, Game Launches & Web Design Work</title>
+  <meta name="description" content="Browse Thrive & Co.'s portfolio: social media growth campaigns, indie game launch marketing, AAA digital promotion, Discord community builds, and web design projects.">
+  <meta name="keywords" content="digital marketing portfolio, game studio marketing portfolio, social media case studies, indie game launch, web design portfolio, Discord community, BioShock Infinite, Manifold Garden, Mitoza">
+  <meta name="author" content="Thrive & Co.">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <link rel="canonical" href="https://thriveandco.com/portfolio.html">
+
+  <!-- ═══════════════════════════════════════════
+       OPEN GRAPH
+  ═══════════════════════════════════════════ -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Thrive & Co.">
+  <meta property="og:title" content="Portfolio | Thrive & Co. — Social Media, Game Launches & Web Design Work">
+  <meta property="og:description" content="Browse our portfolio: social media growth, indie game launches, AAA digital promotion, community builds, and premium web design projects.">
+  <meta property="og:url" content="https://thriveandco.com/portfolio.html">
+  <meta property="og:image" content="https://thriveandco.com/images/web-app-manifest-512x512.png">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta property="og:locale" content="en_US">
+
+  <!-- ═══════════════════════════════════════════
+       TWITTER / X CARD
+  ═══════════════════════════════════════════ -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Portfolio | Thrive & Co. — Social Media, Game Launches & Web Design Work">
+  <meta name="twitter:description" content="Browse our portfolio: social media growth, indie game launches, AAA digital promotion, community builds, and premium web design projects.">
+  <meta name="twitter:image" content="https://thriveandco.com/images/web-app-manifest-512x512.png">
+
+  <!-- ═══════════════════════════════════════════
+       FAVICONS
+  ═══════════════════════════════════════════ -->
+  <link rel="icon" type="image/png" sizes="96x96" href="images/favicon-96x96.png">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <link rel="manifest" href="images/site.webmanifest">
+  <meta name="theme-color" content="#6E2233">
+  <meta name="msapplication-TileColor" content="#6E2233">
+
+  <!-- ═══════════════════════════════════════════
+       STRUCTURED DATA — BreadcrumbList
+  ═══════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://thriveandco.com/index.html"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Portfolio",
+        "item": "https://thriveandco.com/portfolio.html"
+      }
+    ]
+  }
+  </script>
+
+  <!-- ═══════════════════════════════════════════
+       STRUCTURED DATA — ItemList (Portfolio pieces)
+  ═══════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Thrive & Co. Portfolio",
+    "url": "https://thriveandco.com/portfolio.html",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Manifold Garden: Release Asset & Creator Strategy" },
+      { "@type": "ListItem", "position": 2, "name": "Irrational Games (BioShock Infinite): Digital Promotion Contract" },
+      { "@type": "ListItem", "position": 3, "name": "Mitoza: Discord Infrastructure & Launch Prep" },
+      { "@type": "ListItem", "position": 4, "name": "Lexica: Digital Hub & Client Acquisition" },
+      { "@type": "ListItem", "position": 5, "name": "Meal: Immersive Dining Experience" },
+      { "@type": "ListItem", "position": 6, "name": "VistaHaven: Property Showcase & Lead Engine" }
+    ]
+  }
+  </script>
+
+  <!-- ═══════════════════════════════════════════
+       FONTS & STYLES
+  ═══════════════════════════════════════════ -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -18,7 +104,7 @@
   <nav class="nav" aria-label="Main navigation" data-nav>
     <div class="container nav-inner">
       <a class="brand" href="index.html" aria-label="Thrive and Co. home">
-        <span class="brand-mark">T</span>
+        <img src="images/thrive-logo.png" alt="Thrive &amp; Co. logo" class="brand-mark">
         <span>Thrive & Co.</span>
       </a>
       <div class="nav-links">
@@ -38,7 +124,7 @@
   <aside class="mobile-drawer" id="mobile-menu" data-mobile-drawer aria-hidden="true">
     <div class="drawer-head">
       <a class="brand" href="index.html" aria-label="Thrive and Co. home">
-        <span class="brand-mark">T</span>
+        <img src="images/thrive-logo.png" alt="Thrive &amp; Co. logo" class="brand-mark">
         <span>Thrive & Co.</span>
       </a>
       <button class="drawer-close" type="button" data-drawer-close aria-label="Close navigation menu">
@@ -68,7 +154,7 @@
         <div class="portfolio-tabs">
           <a class="btn btn-soft" href="#social">Social Media Work</a>
           <a class="btn btn-dark-outline" href="#games">Game Studio Work</a>
-          <a class="btn btn-dark-outline" href="#web-dev">Web Design Work</a>
+          <a class="btn btn-dark-outline" href="#games">Web Design Work</a>
         </div>
       </div>
     </section>
@@ -202,7 +288,7 @@
       </div>
     </section>
 
-    <section class="section" id="web-dev">
+    <section class="section" id="web">
       <div class="container">
         <div class="showcase-banner social-bg">
           <div class="banner-content">
@@ -225,7 +311,7 @@
 
         <div class="cards-scroll grid cols-3">
           <article class="card case-card">
-            <div class="media-tile has-image"><img src="images/Lexica.png" alt="Lexica legal platform screenshot"><span class="media-caption"> Legal &amp; Client Acquisition</span></div>
+            <div class="media-tile has-image"><img src="images/Lexica.png" alt="Lexica legal platform screenshot"><span class="media-caption">⚖️ Legal &amp; Client Acquisition</span></div>
             <div class="case-body">
               <h3>Lexica: Digital Hub &amp; Client Acquisition</h3>
               <p>A boutique corporate law firm needed a modern digital presence to look highly credible online and streamline their consultation booking pipeline. I built a premium website featuring a semi-transparent floating navigation system, clear typographic hierarchy, and an integrated, high-conversion scheduling funnel.</p>
@@ -233,15 +319,15 @@
             </div>
           </article>
           <article class="card case-card">
-            <div class="media-tile has-image"><img src="images/Meal2.png" alt="Meal restaurant landing page screenshot"><span class="media-caption"> Dining &amp; Reservations</span></div>
+            <div class="media-tile has-image"><img src="images/Meal2.png" alt="Meal restaurant landing page screenshot"><span class="media-caption">🍔 Dining &amp; Reservations</span></div>
             <div class="case-body">
-              <h3>Meal2: Immersive Dining Experience</h3>
+              <h3>Meal: Immersive Dining Experience</h3>
               <p>A high-end restaurant needed a high-performance landing page to showcase their menu and drive online reservations. I developed a full-screen, visually driven interface with optimized high-resolution media loading, a sticky user-action navigation bar, and integrated social media direct-contact links.</p>
               <div class="tag-row"><span class="tag">Responsive Web Design</span><span class="tag">Performance Tuning</span><span class="tag">Conversion Design</span></div>
             </div>
           </article>
           <article class="card case-card">
-            <div class="media-tile has-image"><img src="images/vista-haven.png" alt="VistaHaven real estate portal screenshot"><span class="media-caption"> Luxury Real Estate</span></div>
+            <div class="media-tile has-image"><img src="images/vista-haven.png" alt="VistaHaven real estate portal screenshot"><span class="media-caption">🏢 Luxury Real Estate</span></div>
             <div class="case-body">
               <h3>VistaHaven: Property Showcase &amp; Lead Engine</h3>
               <p>A real estate agency required an elite web portal to present high-value properties and capture premium agent leads. I engineered a modern, curved container layout featuring dynamic stat counters, custom agent profile carousels, and highly visible interactive call-to-action touchpoints.</p>
@@ -277,7 +363,7 @@
     <div class="container">
       <div class="footer-grid">
         <div>
-          <a class="brand" href="index.html"><span class="brand-mark">T</span><span>Thrive & Co.</span></a>
+          <a class="brand" href="index.html"><img src="images/thrive-logo.png" alt="Thrive &amp; Co. logo" class="brand-mark"><span>Thrive & Co.</span></a>
           <p>Helping ambitious brands and studios grow through strategy, design, content, and launch systems.</p>
           <p>hello@thriveandco.com<br>+234 XXXX XXXX</p>
         </div>

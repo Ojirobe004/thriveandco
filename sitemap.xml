@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <url>
+    <loc>https://thriveandco.site/index.html</loc>
+    <lastmod>2025-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://thriveandco.site/images/web-app-manifest-512x512.png</image:loc>
+      <image:title>Thrive &amp; Co. — Growth, Content &amp; Game Studio Marketing</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://thriveandco.site/portfolio.html</loc>
+    <lastmod>2025-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://thriveandco.site/images/Lexica.png</image:loc>
+      <image:title>Lexica — Legal Web Platform</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://thriveandco.site/images/Meal2.png</image:loc>
+      <image:title>Meal — Restaurant Landing Page</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://thriveandco.site/images/vista-haven.png</image:loc>
+      <image:title>VistaHaven — Luxury Real Estate Portal</image:title>
+    </image:image>
+  </url>
+
+</urlset>
