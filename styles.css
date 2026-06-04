@@ -427,30 +427,71 @@ body.menu-open .nav {
   -webkit-backdrop-filter: blur(6px);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 380ms var(--ease-water), visibility 380ms var(--ease-water);
+  transition: opacity 350ms ease, visibility 350ms ease;
 }
-.modal.is-open { opacity: 1; visibility: visible; }
+.modal.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+/* ── Desktop modal content ── */
 .modal-content {
   position: relative;
   width: min(560px, calc(100vw - 32px));
-  max-height: min(78vh, 78dvh);
+  max-height: 80vh;
   overflow-y: auto;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   border-radius: 20px;
-  /* Solid backgrounds — light and dark, no transparency */
   background: #ffffff;
   color: #1a1a1a;
   box-shadow: 0 40px 100px rgba(0,0,0,0.55);
-  padding: 24px 22px;
-  transform: scale(0.93);
-  transition: transform 420ms var(--ease-water);
+  padding: 28px 26px;
+  /* Entry animation */
+  opacity: 0;
+  transform: scale(0.94);
+  transition: opacity 350ms ease, transform 350ms ease;
+}
+.modal.is-open .modal-content {
+  opacity: 1;
+  transform: scale(1);
 }
 [data-theme="dark"] .modal-content {
   background: #1e1e26;
   color: #e5e4e2;
 }
-.modal.is-open .modal-content { transform: scale(1); }
+/* ── Mobile: bottom sheet ── */
+@media (max-width: 767px) {
+  .modal {
+    align-items: flex-end;
+    padding: 0;
+  }
+  .modal-content {
+    width: 100%;
+    max-height: 85dvh;
+    border-radius: 20px 20px 0 0;
+    padding: 8px 18px 36px;
+    /* Override desktop scale with translateY */
+    transform: translateY(100%);
+  }
+  .modal.is-open .modal-content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* Drag handle */
+  .modal-content::before {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(0,0,0,0.14);
+    margin: 10px auto 14px;
+  }
+  [data-theme="dark"] .modal-content::before {
+    background: rgba(255,255,255,0.18);
+  }
+}
+/* ── Modal internals ── */
 .modal-close {
   position: absolute;
   top: 16px; right: 16px;
@@ -464,12 +505,21 @@ body.menu-open .nav {
   font-size: 1.1rem;
   line-height: 1;
   transition: background 0.2s, color 0.2s;
-  float: none;
 }
 .modal-close:hover { background: #6E2233; color: #fff; }
-[data-theme="dark"] .modal-close { border-color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.08); color: #e5e4e2; }
-[data-theme="dark"] .modal-close:hover { background: #6E2233; color: #fff; border-color: #6E2233; }
-.modal-content h3 { margin: 12px 0 16px; font-size: clamp(1.25rem, 2.8vw, 1.7rem); padding-right: 36px; color: #1a1a1a; }
+[data-theme="dark"] .modal-close {
+  border-color: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.08);
+  color: #e5e4e2;
+}
+[data-theme="dark"] .modal-close:hover { background: #6E2233; color: #fff; }
+.modal-content h3 {
+  margin: 12px 0 16px;
+  font-size: clamp(1.2rem, 2.5vw, 1.65rem);
+  padding-right: 40px;
+  color: #1a1a1a;
+  line-height: 1.2;
+}
 [data-theme="dark"] .modal-content h3 { color: #f1f0ee; }
 .modal-visual {
   height: 190px;
@@ -478,13 +528,17 @@ body.menu-open .nav {
   background: linear-gradient(135deg, #f9f0f2, #fff8ef);
   border: 1px solid rgba(0,0,0,0.08);
   overflow: hidden;
+  position: relative;
 }
-[data-theme="dark"] .modal-visual { border-color: rgba(255,255,255,0.1); background: #2a2030; }
+[data-theme="dark"] .modal-visual {
+  border-color: rgba(255,255,255,0.1);
+  background: #2a2030;
+}
 .modal-content p { color: #6b7280; line-height: 1.72; margin-bottom: 12px; }
 [data-theme="dark"] .modal-content p { color: #9ca3af; }
 .modal-content strong { color: #1a1a1a; }
 [data-theme="dark"] .modal-content strong { color: #f1f0ee; }
-.modal-content ul { color: #6b7280; line-height: 1.9; padding-left: 1.2rem; }
+.modal-content ul { color: #6b7280; line-height: 1.9; padding-left: 1.2rem; margin-bottom: 12px; }
 [data-theme="dark"] .modal-content ul { color: #9ca3af; }
 .modal-content .eyebrow { color: #6E2233; }
 
@@ -1070,28 +1124,6 @@ body.menu-open .nav {
 
   /* Nav — tighter */
   .nav-inner { height: 58px; }
-
-  /* Modal on mobile — true bottom sheet feel */
-  .modal { align-items: flex-end; padding: 0; }
-  .modal-content {
-    width: 100%;
-    max-height: 86dvh;
-    border-radius: 22px 22px 0 0;
-    padding: 20px 18px 32px;
-    transform: translateY(40px);
-  }
-  .modal.is-open .modal-content { transform: translateY(0); }
-  /* Drag handle at top of mobile modal */
-  .modal-content::before {
-    content: '';
-    display: block;
-    width: 36px;
-    height: 4px;
-    border-radius: 2px;
-    background: rgba(0,0,0,0.15);
-    margin: 0 auto 16px;
-  }
-  [data-theme="dark"] .modal-content::before { background: rgba(255,255,255,0.2); }
 
   /* Testimonials — full width on mobile */
   .testimonial { padding: 18px; }
