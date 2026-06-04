@@ -62,9 +62,8 @@
       "email": "hello@thriveandco.site"
     },
     "sameAs": [
-      "https://www.instagram.com/thriveandco",
-      "https://www.linkedin.com/company/thriveandco",
-      "https://www.tiktok.com/@thriveandco",
+      "https://www.instagram.com/thrive_by_ridwan",
+      "https://www.linkedin.com/in/ridwanullah-aboderin-055891359",
       "https://www.upwork.com/ag/thriveandco"
     ]
   }
@@ -97,6 +96,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<div id="scroll-progress" aria-hidden="true"></div>
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="site-shell">
   <nav class="nav" aria-label="Main navigation" data-nav>
@@ -154,8 +154,12 @@
             <a class="btn btn-primary btn-full" href="#contact">Book a Free Growth Audit</a>
             <a class="btn btn-outline btn-full" href="portfolio.html">View Portfolio</a>
           </div>
-          <div class="hero-proof" aria-label="Agency proof points">
-            <div class="proof-card"><strong>5+</strong><span>Years</span></div>
+          <div class="scroll-hint" aria-hidden="true">
+            <span>Scroll</span>
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+          <div class="hero-proof reveal" aria-label="Agency proof points">
+            <div class="proof-card"><strong>3+</strong><span>Years</span></div>
             <div class="proof-card"><strong>30+</strong><span>Launches</span></div>
             <div class="proof-card"><strong>5x</strong><span>ROAS focus</span></div>
           </div>
@@ -165,13 +169,15 @@
           <div class="visual-card dashboard-card">
             <div class="dashboard-top">
               <div class="dots"><span></span><span></span><span></span></div>
-              <small>Live growth board</small>
+              <small>Live growth board — Toplitz Productions</small>
             </div>
-            <div class="chart"></div>
+            <div class="chart" style="position:relative;overflow:hidden;border-radius:8px;">
+              <img src="images/Toplitz Produtions.png" alt="Toplitz Productions X analytics" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:0.85;">
+            </div>
             <div class="metric-row">
-              <div class="metric"><strong>+218%</strong><span>Engagement</span></div>
-              <div class="metric"><strong>8K</strong><span>Wishlists</span></div>
-              <div class="metric"><strong>3.4x</strong><span>Leads</span></div>
+              <div class="metric"><strong>57.2K</strong><span>Impressions</span></div>
+              <div class="metric"><strong>3.6%</strong><span>Eng. rate</span></div>
+              <div class="metric"><strong>1,042</strong><span>Link clicks</span></div>
             </div>
           </div>
           <div class="visual-card floating-card">
@@ -183,7 +189,7 @@
       </div>
     </section>
 
-    <div class="logo-strip" aria-label="Capabilities">
+    <div class="logo-strip reveal" aria-label="Capabilities">
       <div class="container">
         <span class="logo-pill">Paid social</span>
         <span class="logo-pill">Brand systems</span>
@@ -196,7 +202,7 @@
 
     <section class="section" id="about">
       <div class="container grid cols-2">
-        <div class="section-head">
+        <div class="section-head reveal">
           <span class="eyebrow">What makes us useful</span>
           <h2 class="section-title">Strategy with taste. Execution with numbers.</h2>
         </div>
@@ -209,44 +215,44 @@
 
     <section class="section alt" id="services">
       <div class="container">
-        <div class="section-head center">
+        <div class="section-head reveal center">
           <span class="eyebrow">Services</span>
           <h2 class="section-title">Everything your next growth push needs.</h2>
           <p class="section-copy">Mobile visitors can swipe through the cards; desktop visitors get a clean scan-friendly grid.</p>
         </div>
 
         <div class="cards-scroll grid cols-3">
-          <article class="card service-card">
+          <article class="card service-card"><span class="card-shine" aria-hidden="true"></span>
             <div class="service-icon">01</div>
             <h3>Digital Growth</h3>
             <p>Paid ads, funnels, landing pages, email flows, and lead generation systems that turn traffic into measurable pipeline.</p>
             <a class="service-link" href="#contact">Start growth plan</a>
           </article>
-          <article class="card service-card">
+          <article class="card service-card"><span class="card-shine" aria-hidden="true"></span>
             <div class="service-icon">02</div>
             <h3>Brand & Web Design</h3>
             <p>Premium visual direction, websites, landing pages, and messaging systems that make trust easier to earn.</p>
             <a class="service-link" href="#contact">Build the brand</a>
           </article>
-          <article class="card service-card">
+          <article class="card service-card"><span class="card-shine" aria-hidden="true"></span>
             <div class="service-icon">03</div>
             <h3>Content & Social</h3>
             <p>Short-form video, content calendars, creator direction, community management, and platform-specific growth plays.</p>
             <a class="service-link" href="portfolio.html#social">See social work</a>
           </article>
-          <article class="card service-card">
+          <article class="card service-card"><span class="card-shine" aria-hidden="true"></span>
             <div class="service-icon">04</div>
             <h3>SEO & Analytics</h3>
             <p>Search visibility, reporting dashboards, conversion insights, and monthly optimization rituals that keep growth honest.</p>
             <a class="service-link" href="#contact">Audit performance</a>
           </article>
-          <article class="card service-card">
+          <article class="card service-card"><span class="card-shine" aria-hidden="true"></span>
             <div class="service-icon">05</div>
             <h3>Game Studio Solutions</h3>
             <p>Steam wishlist campaigns, launch marketing, Discord growth, creator outreach, and studio branding for indie teams.</p>
             <a class="service-link" href="portfolio.html#games">See game work</a>
           </article>
-          <article class="card service-card">
+          <article class="card service-card"><span class="card-shine" aria-hidden="true"></span>
             <div class="service-icon">06</div>
             <h3>Launch Sprints</h3>
             <p>Two to six week sprints for offers, products, campaigns, or game releases that need clear momentum fast.</p>
@@ -258,39 +264,44 @@
 
     <section class="section" id="work-preview">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head reveal">
           <span class="eyebrow">Selected outcomes</span>
           <h2 class="section-title">Built for the scroll, the pitch, and the launch day.</h2>
         </div>
         <div class="cards-scroll grid cols-3">
-          <!-- CASE STUDY MODAL TRIGGER: update copy/metrics here and the matching modal near the bottom of this file. -->
           <article class="card case-card" role="button" tabindex="0" data-modal-open="modal-project-1">
-            <div class="media-tile social"><span class="media-caption">Social growth system</span></div>
+            <div class="media-tile social has-image">
+              <img src="images/Toplitz Produtions.png" alt="Toplitz Productions X analytics" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+              <span class="media-caption">X (Twitter) organic growth</span>
+            </div>
             <div class="case-body">
-              <div class="case-metric">+200%</div>
-              <h3>Engagement lift in 60 days</h3>
-              <p>A content reset with sharper hooks, better creative rhythm, and paid amplification.</p>
-              <!-- CASE STUDY LINK PLACEHOLDER: replace # with a full case study URL if you prefer navigation instead of modal expansion. -->
+              <div class="case-metric">+32.1%</div>
+              <h3>Engagement lift in 30 days</h3>
+              <p>Organic X strategy for Toplitz Productions drove 57.2K impressions and 1,042 storefront link clicks in a single sprint.</p>
               <a class="case-link" href="#" data-modal-open="modal-project-1">View Full Case Study →</a>
             </div>
           </article>
           <article class="card case-card" role="button" tabindex="0" data-modal-open="modal-project-2">
-            <div class="media-tile branding"><span class="media-caption">Conversion redesign</span></div>
+            <div class="media-tile games has-image">
+              <img src="https://thisgengaming.com/wp-content/uploads/2020/08/Manifold-Garden-1536x864.png" alt="Manifold Garden" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+              <span class="media-caption">Game launch campaign</span>
+            </div>
             <div class="case-body">
-              <div class="case-metric">3.4x</div>
-              <h3>More qualified leads</h3>
-              <p>A new landing page and offer path built around faster trust and cleaner decisions.</p>
-              <!-- CASE STUDY LINK PLACEHOLDER: replace # with a full case study URL if you prefer navigation instead of modal expansion. -->
+              <div class="case-metric">↑ Launch</div>
+              <h3>Manifold Garden: Release Assets</h3>
+              <p>Steam page optimisation, infinite-loop GIF asset kit, and a curated creator list that secured key press coverage on launch week.</p>
               <a class="case-link" href="#" data-modal-open="modal-project-2">View Full Case Study →</a>
             </div>
           </article>
           <article class="card case-card" role="button" tabindex="0" data-modal-open="modal-project-3">
-            <div class="media-tile games"><span class="media-caption">Game launch campaign</span></div>
+            <div class="media-tile has-image">
+              <img src="images/vista-haven.png" alt="VistaHaven real estate portal" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+              <span class="media-caption">Web design · Real estate</span>
+            </div>
             <div class="case-body">
-              <div class="case-metric">8K</div>
-              <h3>Steam wishlists pre-launch</h3>
-              <p>A twelve-week content, creator, and community runway for an indie RPG.</p>
-              <!-- CASE STUDY LINK PLACEHOLDER: replace # with a full case study URL if you prefer navigation instead of modal expansion. -->
+              <div class="case-metric">↑ Leads</div>
+              <h3>VistaHaven: Property Showcase</h3>
+              <p>Curved layouts, dynamic stat counters, agent carousels, and high-visibility CTAs for a luxury real estate portal.</p>
               <a class="case-link" href="#" data-modal-open="modal-project-3">View Full Case Study →</a>
             </div>
           </article>
@@ -300,22 +311,22 @@
 
     <section class="section alt" id="process">
       <div class="container">
-        <div class="section-head center">
+        <div class="section-head reveal center">
           <span class="eyebrow">Process</span>
           <h2 class="section-title">A simple path from messy to moving.</h2>
         </div>
-        <div class="process-grid">
-          <article class="card process-card">
+        <div class="process-grid reveal">
+          <article class="card process-card"><span class="card-shine" aria-hidden="true"></span>
             <div class="step">1</div>
             <h3>Diagnose</h3>
             <p class="section-copy">We audit your brand, channels, offer, audience, and conversion path to find the highest-leverage opportunities.</p>
           </article>
-          <article class="card process-card">
+          <article class="card process-card"><span class="card-shine" aria-hidden="true"></span>
             <div class="step">2</div>
             <h3>Build</h3>
             <p class="section-copy">We create the creative system: messaging, content direction, campaign structure, landing pages, and launch assets.</p>
           </article>
-          <article class="card process-card">
+          <article class="card process-card"><span class="card-shine" aria-hidden="true"></span>
             <div class="step">3</div>
             <h3>Optimize</h3>
             <p class="section-copy">We track what moves, cut what does not, and compound the channels that bring the best audience and revenue.</p>
@@ -326,40 +337,37 @@
 
     <section class="section" id="testimonials">
       <div class="container">
-        <div class="section-head center">
+        <div class="section-head reveal center">
           <span class="eyebrow">Social Proof</span>
           <h2 class="section-title">Client Success Stories</h2>
         </div>
         <div class="cards-scroll grid cols-3">
-          <article class="card testimonial">
+          <article class="card testimonial"><span class="card-shine" aria-hidden="true"></span>
             <div class="quote-mark">&quot;</div>
-            <p>Thrive & Co. helped us <strong>triple engagement in 60 days</strong>. Clear strategy, excellent execution. Genuinely transformative for our brand.</p>
-            <div class="person">Client Name, CEO of Tech Start-up</div>
+            <p>It was an extremely professional and wonderful collaboration with magnificent workmanship. I believe one of the main reasons for such excellent workmanship is the use of highly attractive designs and the variety of options available. I was very pleased with the work done for the price I paid.</p>
+            <div class="person">yildiz_emre — Verified Client Review</div>
           </article>
-          <article class="card testimonial">
+          <article class="card testimonial"><span class="card-shine" aria-hidden="true"></span>
             <div class="quote-mark">&quot;</div>
-            <p>Our new website design immediately improved lead quality. They nailed the branding; it feels premium but completely us.</p>
-            <div class="person">Jane Doe, Founder & Creator</div>
+            <p>I had been struggling a lot with understanding Steam wishlists and game marketing, but thanks to your help, I learned a great deal. You were always kind, responsive, and very organised throughout the process. Everything felt professional, and I truly appreciated the clear communication and support.</p>
+            <div class="person">flyingkimchiman — Game Developer &amp; Repeat Client</div>
           </article>
-          <article class="card testimonial">
+          <article class="card testimonial"><span class="card-shine" aria-hidden="true"></span>
             <div class="quote-mark">&quot;</div>
-            <p>The team scaled our ad spend efficiently and delivered a phenomenal <strong>5x ROI in Q3</strong>. Best agency decision we've made.</p>
-            <div class="person">Michael B., Marketing Director</div>
+            <p>Very good again. He is very professional, reliable, and easy to work with.</p>
+            <div class="person">flyingkimchiman — Follow-up Milestone Engagement</div>
           </article>
-          <!-- TEMPORARY REVIEW IMAGE: replace src with a real Fiverr review screenshot. -->
-          <article class="card testimonial image-review">
-            <img src="https://placehold.co/640x420/f9f0f2/6E2233?text=Fiverr+Review+Screenshot" alt="Fiverr review screenshot" loading="lazy" width="640" height="420">
-            <div class="person">Fiverr Review Screenshot</div>
+          <article class="card testimonial image-review"><span class="card-shine" aria-hidden="true"></span>
+            <img src="images/Review1.jpg" alt="Client review screenshot" loading="lazy" width="640" height="360">
+            <div class="person">Verified Client Review</div>
           </article>
-          <!-- TEMPORARY REVIEW IMAGE: replace src with a real Upwork review screenshot. -->
-          <article class="card testimonial image-review">
-            <img src="https://placehold.co/640x420/f8f7f5/6E2233?text=Upwork+Review+Screenshot" alt="Upwork review screenshot" loading="lazy" width="640" height="420">
-            <div class="person">Upwork Review Screenshot</div>
+          <article class="card testimonial image-review"><span class="card-shine" aria-hidden="true"></span>
+            <img src="images/Review2.jpg" alt="Client review screenshot" loading="lazy" width="640" height="360">
+            <div class="person">Verified Client Review</div>
           </article>
-          <!-- TEMPORARY REVIEW IMAGE: replace src with another real marketplace/client review screenshot. -->
-          <article class="card testimonial image-review">
-            <img src="https://placehold.co/640x420/f9f0f2/6E2233?text=Client+Review+Screenshot" alt="Client review screenshot" loading="lazy" width="640" height="420">
-            <div class="person">Client Review Screenshot</div>
+          <article class="card testimonial image-review"><span class="card-shine" aria-hidden="true"></span>
+            <img src="images/Review3.jpg" alt="Client review screenshot" loading="lazy" width="640" height="360">
+            <div class="person">Verified Client Review</div>
           </article>
         </div>
       </div>
@@ -379,7 +387,7 @@
 
     <section class="section" id="contact-form">
       <div class="container">
-        <div class="section-head center">
+        <div class="section-head reveal center">
           <span class="eyebrow">Send a Brief</span>
           <h2 class="section-title">Tell us what you are building.</h2>
           <p class="section-copy">Fill out the form below and hit Send — it'll open your email client with everything pre-filled, ready to go.</p>
@@ -415,33 +423,44 @@
     <div class="modal-content">
       <button class="modal-close" type="button" data-modal-close aria-label="Close case study">×</button>
       <span class="eyebrow">Case Study</span>
-      <h3 id="modal1-title">Project Alpha: Social Engagement Blast</h3>
-      <div class="modal-visual media-tile social" aria-label="Placeholder for Brand Alpha case study image"></div>
-      <p><strong>Client Challenge:</strong> Brand Alpha had strong products but low social visibility and inconsistent engagement.</p>
-      <p><strong>Our Approach:</strong> We rebuilt the content calendar around reels, proof-led posts, creator collaborations, and paid amplification.</p>
-      <p><strong>Results:</strong> Engagement increased by <strong>+200%</strong> in 60 days with stronger referral traffic and a cleaner brand presence.</p>
+      <h3 id="modal1-title">Toplitz Productions: Community Velocity Strategy</h3>
+      <div class="modal-visual media-tile has-image" aria-label="Toplitz Productions X analytics screenshot" style="position:relative;overflow:hidden;">
+        <img src="images/Toplitz Produtions.png" alt="Toplitz Productions X analytics" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+      </div>
+      <p><strong>The Problem:</strong> A mid-sized European publisher wanted to convert background interest into measurable community momentum on X (formerly Twitter) leading up to a major seasonal content update for their flagship simulation franchise.</p>
+      <p><strong>The Strategy:</strong> I took over daily optimisation and community engagement on X, deploying content emphasising user-generated narratives ("Live your story. Build your legacy."). I focused on high-conversion visual elements, structured community reply strategies, and organic pacing to turn historical simulation players into active advocates.</p>
+      <p><strong>Results (30-Day Sprint):</strong></p>
+      <ul style="color:var(--muted);line-height:1.9;padding-left:1.2rem;">
+        <li><strong>57.2K total impressions</strong> generated entirely via organic content positioning (↑ 18.7%)</li>
+        <li><strong>3.6% average engagement rate</strong> by transforming generic broadcasts into interactive dialogue (↑ 32.1%)</li>
+        <li><strong>1,042 trackable link clicks</strong> driven directly to the game's storefront and community hubs (↑ 19.3%)</li>
+      </ul>
     </div>
   </div>
   <div class="modal" id="modal-project-2" role="dialog" aria-modal="true" aria-labelledby="modal2-title">
     <div class="modal-content">
       <button class="modal-close" type="button" data-modal-close aria-label="Close case study">×</button>
       <span class="eyebrow">Case Study</span>
-      <h3 id="modal2-title">Project Beta: Lead Generation Mastery</h3>
-      <div class="modal-visual media-tile branding" aria-label="Placeholder for Brand Beta case study image"></div>
-      <p><strong>Client Challenge:</strong> Brand Beta needed more qualified leads, but their old page was unclear and slow to build trust.</p>
-      <p><strong>Our Approach:</strong> We redesigned the landing flow, tightened the offer, and created a conversion path with stronger proof.</p>
-      <p><strong>Results:</strong> Qualified leads grew by <strong>3.4x</strong> while the team got a sharper page to support paid campaigns.</p>
+      <h3 id="modal2-title">Manifold Garden: Release Asset & Creator Strategy</h3>
+      <div class="modal-visual media-tile has-image" aria-label="Manifold Garden screenshot" style="position:relative;overflow:hidden;">
+        <img src="https://thisgengaming.com/wp-content/uploads/2020/08/Manifold-Garden-1536x864.png" alt="Manifold Garden" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+      </div>
+      <p><strong>Client Challenge:</strong> A solo developer needed targeted launch support for a mind-bending puzzle game seven years in the making — with a non-Euclidean concept requiring careful positioning for non-gamer press.</p>
+      <p><strong>Our Approach:</strong> Optimised Steam page messaging for broader, non-gamer appeal; designed a high-conversion social media asset kit featuring infinite-loop gameplay GIFs; and built a curated creator outreach list targeting aesthetic and architecture-adjacent audiences.</p>
+      <p><strong>Results:</strong> The asset kit and creator list secured <strong>key coverage during launch week</strong>, positioning the game as a work of high art across a successful multi-platform release.</p>
     </div>
   </div>
   <div class="modal" id="modal-project-3" role="dialog" aria-modal="true" aria-labelledby="modal3-title">
     <div class="modal-content">
       <button class="modal-close" type="button" data-modal-close aria-label="Close case study">×</button>
       <span class="eyebrow">Case Study</span>
-      <h3 id="modal3-title">Project Gamma: Game Launch Runway</h3>
-      <div class="modal-visual media-tile games" aria-label="Placeholder for game launch case study image"></div>
-      <p><strong>Client Challenge:</strong> A small studio needed players aware of the game before launch day, not after.</p>
-      <p><strong>Our Approach:</strong> We built a 12-week wishlist, creator outreach, and community rhythm around the game hook.</p>
-      <p><strong>Results:</strong> The campaign drove <strong>8K Steam wishlists</strong> before launch and gave the studio a repeatable release system.</p>
+      <h3 id="modal3-title">VistaHaven: Property Showcase & Lead Engine</h3>
+      <div class="modal-visual media-tile has-image" aria-label="VistaHaven real estate portal screenshot" style="position:relative;overflow:hidden;">
+        <img src="images/vista-haven.png" alt="VistaHaven real estate portal" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+      </div>
+      <p><strong>Client Challenge:</strong> A real estate agency needed an elite web portal that would present high-value properties with credibility and capture premium agent leads without feeling generic or template-built.</p>
+      <p><strong>Our Approach:</strong> I engineered a modern, curved container layout featuring dynamic stat counters, custom agent profile carousels, and high-visibility interactive call-to-action touchpoints — built for both visual impact and lead conversion.</p>
+      <p><strong>Results:</strong> The portal elevated the agency's perceived prestige, streamlined property browsing, and created clearly defined lead capture touchpoints that increased qualified agent enquiries from day one.</p>
     </div>
   </div>
   </main>
@@ -452,7 +471,13 @@
         <div>
           <a class="brand" href="index.html"><img src="images/thrive-logo.jpeg" alt="Thrive &amp; Co. logo" class="brand-mark"><span>Thrive & Co.</span></a>
           <p>Helping ambitious brands and studios grow through strategy, design, content, and launch systems.</p>
-          <p>hello@thriveandco.site<br>+234 XXXX XXXX</p>
+          <p>hello@thriveandco.site<br>
+            <a href="https://wa.me/2349022921994" class="phone-copy" id="phone-copy-footer" onclick="copyPhone(event, '+234 902 292 1994')">
+              +234 902 292 1994
+              <i class="fas fa-copy copy-icon" aria-hidden="true"></i>
+              <span class="copy-tip">Copied!</span>
+            </a>
+          </p>
         </div>
         <div>
           <h4>Quick Links</h4>
@@ -475,11 +500,10 @@
         <div>
           <h4>Connect</h4>
           <div class="social-links">
-            <!-- SOCIAL LINKS: replace # with the real profile URLs. -->
-            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-            <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.instagram.com/thrive_by_ridwan" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/ridwanullah-aboderin-055891359?utm_source=share_via&utm_content=profile&utm_medium=member_android" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <!-- <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a> -->
+            <a href="https://wa.me/2349022921994" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
             <a href="#" aria-label="Upwork"><i class="fab fa-upwork"></i></a>
           </div>
         </div>
