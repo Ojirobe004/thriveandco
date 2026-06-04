@@ -175,12 +175,22 @@ document.querySelectorAll('[data-mailto-form]').forEach((form) => {
 // Copies phone number to clipboard and briefly shows a "Copied!" tooltip.
 function copyPhone(event, number) {
   event.preventDefault();
-  if (!navigator.clipboard) return; // fallback: link still opens WhatsApp
-  navigator.clipboard.writeText(number).then(() => {
-    const el = event.currentTarget;
+  const el = event.currentTarget;
+
+  const finish = () => {
     el.classList.add('copied');
-    setTimeout(() => el.classList.remove('copied'), 1800);
-  });
+    setTimeout(() => el.classList.remove('copied'), 2000);
+  };
+
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(number).then(finish).catch(() => {
+      // Clipboard failed — still open WhatsApp link
+      window.open('https://wa.me/2349022921994', '_blank');
+    });
+  } else {
+    // Fallback for non-secure contexts (e.g. file://) — open WhatsApp
+    window.open('https://wa.me/2349022921994', '_blank');
+  }
 }
 
 // ── SCROLL PROGRESS BAR ───────────────────────────────────

@@ -296,8 +296,8 @@ body.menu-open .nav {
 .proof-card span { display: block; margin-top: 3px; color: var(--muted); font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
 
 .hero-visual { position: relative; min-height: 410px; }
-.visual-card { position: absolute; border: 1px solid rgba(255,255,255,0.7); border-radius: 18px; background: rgba(255,255,255,0.72); box-shadow: var(--shadow-lg); backdrop-filter: blur(16px); overflow: hidden; }
-[data-theme="dark"] .visual-card { background: rgba(255,255,255,0.06); border-color: var(--line); }
+.visual-card { position: absolute; border: 1px solid rgba(255,255,255,0.18); border-radius: 18px; background: #fff; box-shadow: var(--shadow-lg); overflow: hidden; }
+[data-theme="dark"] .visual-card { background: #1c1c22; border-color: rgba(255,255,255,0.1); }
 .dashboard-card { inset: 14px 0 56px 16px; padding: 16px; }
 .dashboard-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
 .dots { display: flex; gap: 6px; }
@@ -309,6 +309,8 @@ body.menu-open .nav {
 .chart { height: 180px; border-radius: 12px; background: linear-gradient(180deg, #fbf1f3, #fff); position: relative; overflow: hidden; }
 [data-theme="dark"] .chart { background: linear-gradient(180deg, #171018, #101015); }
 .chart::before { content: ""; position: absolute; inset: 35px 18px 18px; background: linear-gradient(135deg, transparent 0 12%, var(--gold) 12% 15%, transparent 15% 32%, var(--wine) 32% 35%, transparent 35% 52%, var(--wine-2) 52% 55%, transparent 55% 72%, var(--green) 72% 75%, transparent 75%); clip-path: polygon(0 68%, 18% 56%, 35% 62%, 50% 34%, 67% 42%, 83% 18%, 100% 26%, 100% 100%, 0 100%); opacity: 0.94; }
+.chart:has(img)::before { display: none; }
+.chart img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
 .metric-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
 .metric { padding: 12px; box-shadow: none; }
 .metric strong { display: block; font-size: 1.08rem; }
@@ -419,8 +421,8 @@ body.menu-open .nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(16px, 4vw, 40px);
-  background: rgba(8,8,12,0.82);
+  padding: 16px;
+  background: rgba(8,8,12,0.85);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   opacity: 0;
@@ -430,17 +432,23 @@ body.menu-open .nav {
 .modal.is-open { opacity: 1; visibility: visible; }
 .modal-content {
   position: relative;
-  width: min(580px, 100%);
-  max-height: min(82vh, 82dvh);
+  width: min(560px, calc(100vw - 32px));
+  max-height: min(78vh, 78dvh);
   overflow-y: auto;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
   border-radius: 20px;
-  background: var(--paper) !important;
-  color: var(--ink);
-  box-shadow: 0 32px 80px rgba(0,0,0,0.45);
-  padding: clamp(20px, 5vw, 36px);
+  /* Solid backgrounds — light and dark, no transparency */
+  background: #ffffff;
+  color: #1a1a1a;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.55);
+  padding: 24px 22px;
   transform: scale(0.93);
-  transition: transform 440ms var(--ease-water);
+  transition: transform 420ms var(--ease-water);
+}
+[data-theme="dark"] .modal-content {
+  background: #1e1e26;
+  color: #e5e4e2;
 }
 .modal.is-open .modal-content { transform: scale(1); }
 .modal-close {
@@ -448,9 +456,9 @@ body.menu-open .nav {
   top: 16px; right: 16px;
   width: 36px; height: 36px;
   border-radius: 50%;
-  border: 1px solid var(--line);
-  background: var(--wine-soft);
-  color: var(--wine);
+  border: 1px solid rgba(110,34,51,0.2);
+  background: rgba(110,34,51,0.08);
+  color: #6E2233;
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   font-size: 1.1rem;
@@ -458,17 +466,27 @@ body.menu-open .nav {
   transition: background 0.2s, color 0.2s;
   float: none;
 }
-.modal-close:hover { background: var(--wine); color: #fff; }
-.modal-content h3 { margin: 12px 0 16px; font-size: clamp(1.3rem, 3vw, 1.8rem); padding-right: 32px; }
+.modal-close:hover { background: #6E2233; color: #fff; }
+[data-theme="dark"] .modal-close { border-color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.08); color: #e5e4e2; }
+[data-theme="dark"] .modal-close:hover { background: #6E2233; color: #fff; border-color: #6E2233; }
+.modal-content h3 { margin: 12px 0 16px; font-size: clamp(1.25rem, 2.8vw, 1.7rem); padding-right: 36px; color: #1a1a1a; }
+[data-theme="dark"] .modal-content h3 { color: #f1f0ee; }
 .modal-visual {
-  height: 200px;
-  border-radius: var(--radius);
-  margin: 0 0 20px;
-  background: linear-gradient(135deg, var(--wine-soft), #fff8ef);
-  border: 1px solid var(--line);
+  height: 190px;
+  border-radius: 12px;
+  margin: 0 0 18px;
+  background: linear-gradient(135deg, #f9f0f2, #fff8ef);
+  border: 1px solid rgba(0,0,0,0.08);
   overflow: hidden;
 }
-.modal-content p { color: var(--muted); line-height: 1.72; margin-bottom: 12px; }
+[data-theme="dark"] .modal-visual { border-color: rgba(255,255,255,0.1); background: #2a2030; }
+.modal-content p { color: #6b7280; line-height: 1.72; margin-bottom: 12px; }
+[data-theme="dark"] .modal-content p { color: #9ca3af; }
+.modal-content strong { color: #1a1a1a; }
+[data-theme="dark"] .modal-content strong { color: #f1f0ee; }
+.modal-content ul { color: #6b7280; line-height: 1.9; padding-left: 1.2rem; }
+[data-theme="dark"] .modal-content ul { color: #9ca3af; }
+.modal-content .eyebrow { color: #6E2233; }
 
 @media (min-width: 640px) {
   .hero-actions { flex-direction: row; }
@@ -860,33 +878,41 @@ body.menu-open .nav {
   text-decoration: none;
   color: inherit;
   position: relative;
+  -webkit-tap-highlight-color: transparent;
 }
 .phone-copy .copy-icon {
   opacity: 0;
   font-size: 0.78rem;
-  color: var(--wine);
+  color: #6E2233;
   transition: opacity 0.2s ease;
   flex-shrink: 0;
 }
-.phone-copy:hover .copy-icon { opacity: 1; }
-.phone-copy:hover { color: var(--wine); }
+.phone-copy:hover .copy-icon,
+.phone-copy:focus .copy-icon { opacity: 1; }
+.phone-copy:hover,
+.phone-copy:focus { color: #6E2233; }
+/* Tooltip — only shows when JS adds .copied, never by default */
 .phone-copy .copy-tip {
   position: absolute;
-  bottom: calc(100% + 6px);
+  bottom: calc(100% + 8px);
   left: 50%;
-  transform: translateX(-50%);
-  background: var(--wine);
+  transform: translateX(-50%) translateY(4px);
+  background: #6E2233;
   color: #fff;
-  font-size: 0.7rem;
-  font-weight: 600;
-  padding: 3px 8px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 4px 10px;
   border-radius: 6px;
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
-.phone-copy.copied .copy-tip { opacity: 1; }
+.phone-copy.copied .copy-icon { opacity: 1; color: #6E2233; }
+.phone-copy.copied .copy-tip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
 
 /* ══════════════════════════════════════════
    SCROLL PROGRESS BAR
@@ -963,27 +989,31 @@ body.menu-open .nav {
 }
 
 /* ══════════════════════════════════════════
-   SMOOTH ANCHOR SCROLL INDICATOR
+   SCROLL HINT — desktop only, subtle
 ══════════════════════════════════════════ */
 .scroll-hint {
-  display: flex;
+  display: none; /* hidden on mobile */
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  opacity: 0.45;
-  margin-top: 2.5rem;
-  animation: bounce-hint 2s ease-in-out infinite;
+  gap: 4px;
+  opacity: 0.35;
+  margin-top: 1.5rem;
+  animation: bounce-hint 2.4s ease-in-out infinite;
+  transition: opacity 0.4s ease;
+}
+@media (min-width: 768px) {
+  .scroll-hint { display: flex; }
 }
 .scroll-hint span {
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
-.scroll-hint svg { width: 18px; height: 18px; }
+.scroll-hint svg { width: 14px; height: 14px; }
 @keyframes bounce-hint {
   0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(6px); }
+  50%       { transform: translateY(5px); }
 }
 
 /* ══════════════════════════════════════════
@@ -1008,4 +1038,81 @@ body.menu-open .nav {
 @keyframes page-fade-in {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ══════════════════════════════════════════
+   MOBILE EXPERIENCE IMPROVEMENTS
+══════════════════════════════════════════ */
+@media (max-width: 767px) {
+
+  /* Cards — tighter, better proportioned for small screens */
+  .cards-scroll > * { flex: 0 0 78vw; max-width: 300px; }
+
+  /* Section spacing — breathes better on small screens */
+  .section { padding: 52px 0; }
+  .section-title { font-size: clamp(1.8rem, 7vw, 2.8rem); }
+
+  /* Hero — tighter padding, no wasted space */
+  .hero { padding: 100px 0 40px; }
+  .hero h1 { font-size: clamp(2.4rem, 10vw, 3.6rem); }
+  .hero-proof { flex-wrap: wrap; gap: 10px; }
+  .proof-card { padding: 10px 14px; min-width: 80px; }
+
+  /* Hero visual dashboard — hide floating card on smallest screens,
+     give dashboard card proper proportions */
+  .floating-card { display: none; }
+  .hero-visual { min-height: 240px; margin-top: 28px; }
+  .dashboard-card { position: relative; inset: auto; margin: 0; width: 100%; }
+
+  /* Buttons — full width, good tap targets */
+  .btn { min-height: 52px; font-size: 0.95rem; }
+  .hero-actions { gap: 10px; }
+
+  /* Nav — tighter */
+  .nav-inner { height: 58px; }
+
+  /* Modal on mobile — true bottom sheet feel */
+  .modal { align-items: flex-end; padding: 0; }
+  .modal-content {
+    width: 100%;
+    max-height: 86dvh;
+    border-radius: 22px 22px 0 0;
+    padding: 20px 18px 32px;
+    transform: translateY(40px);
+  }
+  .modal.is-open .modal-content { transform: translateY(0); }
+  /* Drag handle at top of mobile modal */
+  .modal-content::before {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(0,0,0,0.15);
+    margin: 0 auto 16px;
+  }
+  [data-theme="dark"] .modal-content::before { background: rgba(255,255,255,0.2); }
+
+  /* Testimonials — full width on mobile */
+  .testimonial { padding: 18px; }
+  .testimonial p { font-size: 0.9rem; }
+
+  /* Footer — single column, readable */
+  .footer-grid { gap: 24px; }
+  .footer { padding: 40px 0 24px; }
+
+  /* Case study metric — slightly smaller */
+  .case-metric { font-size: 1.6rem; }
+
+  /* Stats grid — 2 col on mobile */
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .stat strong { font-size: 1.4rem; }
+
+  /* Phone copy — always show icon on mobile (no hover) */
+  .phone-copy .copy-icon { opacity: 0.6; }
+}
+
+@media (max-width: 400px) {
+  .cards-scroll > * { flex: 0 0 86vw; }
+  .hero h1 { font-size: clamp(2rem, 10vw, 2.8rem); }
 }
