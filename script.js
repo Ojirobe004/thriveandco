@@ -286,3 +286,54 @@ if (scrollHint) {
   };
   window.addEventListener('scroll', hideHint, { passive: true });
 }
+
+// ── LIGHTBOX — review image enlarger ─────────────────────
+const lightbox    = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+
+function openLightbox(src, alt) {
+  if (!lightbox || !lightboxImg) return;
+  lightboxImg.src = src;
+  lightboxImg.alt = alt || 'Review screenshot';
+  lightbox.classList.add('is-open');
+  document.body.classList.add('modal-open');
+}
+
+function closeLightbox() {
+  if (!lightbox) return;
+  lightbox.classList.remove('is-open');
+  document.body.classList.remove('modal-open');
+  // Clear src after transition so there's no flash on re-open
+  setTimeout(() => { if (lightboxImg) lightboxImg.src = ''; }, 400);
+}
+
+document.querySelectorAll('[data-lightbox]').forEach((img) => {
+  img.addEventListener('click', () => openLightbox(img.src, img.alt));
+  // Keyboard accessible
+  img.setAttribute('tabindex', '0');
+  img.setAttribute('role', 'button');
+  img.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openLightbox(img.src, img.alt);
+    }
+  });
+});
+
+// Close on backdrop click
+if (lightbox) {
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+}
+
+// Close button inside lightbox
+document.querySelectorAll('.lightbox-close').forEach((btn) => {
+  btn.addEventListener('click', closeLightbox);
+});
+
+// Escape key already handled globally in closeActiveModal — extend it
+const _origKeydown = document.onkeydown;
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeLightbox();
+});

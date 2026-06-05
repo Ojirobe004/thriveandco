@@ -401,9 +401,9 @@ body.menu-open .nav {
 .banner-content h2 { margin: 10px 0; color: #fff; font-size: clamp(2rem, 7vw, 4.2rem); line-height: 1; letter-spacing: -0.035em; }
 .banner-content p { color: rgba(255,255,255,0.72); line-height: 1.7; }
 .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 24px 0 28px; }
-.stat { padding: 16px; box-shadow: none; }
-.stat strong { display: block; font-size: 1.7rem; letter-spacing: -0.05em; color: var(--ink); }
-.stat span { color: var(--muted); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; }
+.stat { padding: 18px 16px 16px; box-shadow: none; display: flex; flex-direction: column; gap: 6px; }
+.stat strong { display: block; font-size: 1.65rem; letter-spacing: -0.04em; color: var(--ink); line-height: 1; }
+.stat span { color: var(--muted); font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; line-height: 1.4; display: block; }
 .dark .stat { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); }
 .dark .stat strong { color: #fff; }
 .dark .stat span { color: rgba(255,255,255,0.55); }
@@ -459,38 +459,69 @@ body.menu-open .nav {
   background: #1e1e26;
   color: #e5e4e2;
 }
-/* ── Mobile: bottom sheet ── */
+/* ── Mobile: compact centred card ── */
 @media (max-width: 767px) {
   .modal {
-    align-items: flex-end;
-    padding: 0;
+    align-items: center;
+    padding: 20px 16px;
   }
   .modal-content {
     width: 100%;
-    max-height: 85dvh;
-    border-radius: 20px 20px 0 0;
-    padding: 8px 18px 36px;
-    /* Override desktop scale with translateY */
-    transform: translateY(100%);
+    max-height: 78dvh;
+    border-radius: 18px;
+    padding: 20px 16px 24px;
+    transform: scale(0.93);
   }
   .modal.is-open .modal-content {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1);
   }
-  /* Drag handle */
-  .modal-content::before {
-    content: '';
-    display: block;
-    width: 36px;
-    height: 4px;
-    border-radius: 2px;
-    background: rgba(0,0,0,0.14);
-    margin: 10px auto 14px;
+  .modal-content::before { display: none; }
+  .modal-content h3 {
+    font-size: 1.15rem;
+    padding-right: 36px;
+    margin: 8px 0 12px;
   }
-  [data-theme="dark"] .modal-content::before {
-    background: rgba(255,255,255,0.18);
-  }
+  .modal-visual { height: 160px; margin-bottom: 14px; }
+  .modal-content p { font-size: 0.875rem; margin-bottom: 10px; }
+  .modal-content ul { font-size: 0.875rem; }
+  .modal-close { width: 32px; height: 32px; font-size: 1rem; top: 12px; right: 12px; }
 }
+
+/* ══════════════════════════════════════════
+   CUSTOM SCROLLBAR — modal + global
+══════════════════════════════════════════ */
+
+/* Webkit (Chrome, Safari, Edge) */
+.modal-content::-webkit-scrollbar {
+  width: 4px;
+}
+.modal-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+.modal-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #6E2233, #8D3A46);
+  border-radius: 99px;
+}
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: #6E2233;
+}
+
+/* Firefox */
+.modal-content {
+  scrollbar-width: thin;
+  scrollbar-color: #6E2233 transparent;
+}
+
+/* Global page scrollbar — subtle, branded */
+html::-webkit-scrollbar { width: 5px; }
+html::-webkit-scrollbar-track { background: transparent; }
+html::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #6E2233 0%, #8D3A46 100%);
+  border-radius: 99px;
+}
+html::-webkit-scrollbar-thumb:hover { background: #6E2233; }
+html { scrollbar-width: thin; scrollbar-color: #6E2233 transparent; }
 /* ── Modal internals ── */
 .modal-close {
   position: absolute;
@@ -564,7 +595,9 @@ body.menu-open .nav {
   .cta-panel { grid-template-columns: 1fr auto; }
   .footer-grid { grid-template-columns: 1.35fr 0.7fr 0.9fr 0.9fr; }
   .page-hero { padding: 154px 0 82px; }
-  .stats-grid { grid-template-columns: repeat(4, 1fr); }
+  .stats-grid { grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .stat strong { font-size: 1.55rem; }
+  .stat span { font-size: 0.68rem; }
   .banner-content { padding: 44px; }
 }
 @media (min-width: 1024px) {
@@ -1083,15 +1116,13 @@ body.menu-open .nav {
   transform: scale(1.12);
 }
 
-/* ══════════════════════════════════════════
-   SMOOTH PAGE LOAD FADE
-══════════════════════════════════════════ */
+/* Page load fade — opacity only, NO transform (transform breaks position:fixed children) */
 .site-shell {
   animation: page-fade-in 0.45s ease both;
 }
 @keyframes page-fade-in {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 /* ══════════════════════════════════════════
@@ -1138,7 +1169,9 @@ body.menu-open .nav {
 
   /* Stats grid — 2 col on mobile */
   .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .stat strong { font-size: 1.4rem; }
+  .stat { padding: 14px 12px; gap: 5px; }
+  .stat strong { font-size: 1.35rem; }
+  .stat span { font-size: 0.68rem; }
 
   /* Phone copy — always show icon on mobile (no hover) */
   .phone-copy .copy-icon { opacity: 0.6; }
@@ -1147,4 +1180,66 @@ body.menu-open .nav {
 @media (max-width: 400px) {
   .cards-scroll > * { flex: 0 0 86vw; }
   .hero h1 { font-size: clamp(2rem, 10vw, 2.8rem); }
+}
+
+/* ══════════════════════════════════════════
+   LIGHTBOX
+══════════════════════════════════════════ */
+.lightbox-content {
+  position: relative;
+  width: min(900px, calc(100vw - 32px));
+  max-height: 90dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #0a0a0a;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.7);
+  transform: scale(0.94);
+  opacity: 0;
+  transition: transform 380ms cubic-bezier(0.16,1,0.3,1),
+              opacity 380ms cubic-bezier(0.16,1,0.3,1);
+}
+.modal.is-open .lightbox-content {
+  transform: scale(1);
+  opacity: 1;
+}
+#lightbox-img {
+  width: 100%;
+  height: auto;
+  max-height: 90dvh;
+  object-fit: contain;
+  display: block;
+  border-radius: 16px;
+}
+.lightbox-content .modal-close {
+  position: absolute;
+  top: 12px; right: 12px;
+  background: rgba(0,0,0,0.55);
+  border-color: rgba(255,255,255,0.2);
+  color: #fff;
+  z-index: 10;
+}
+.lightbox-content .modal-close:hover {
+  background: #6E2233;
+  border-color: #6E2233;
+}
+/* Clickable review images — show zoom cursor + subtle scale hint */
+.lightbox-trigger {
+  cursor: zoom-in;
+  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1),
+              box-shadow 0.3s ease;
+  display: block;
+  width: 100%;
+}
+.lightbox-trigger:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+@media (max-width: 767px) {
+  .lightbox-content {
+    width: calc(100vw - 24px);
+    border-radius: 12px;
+  }
 }
