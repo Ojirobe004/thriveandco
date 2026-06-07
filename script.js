@@ -158,7 +158,7 @@ document.querySelectorAll('[data-mailto-form]').forEach((form) => {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     const formData = new FormData(form);
-    const recipient = form.dataset.recipient || 'hello@thriveandco.com'; // PLACEHOLDER: replace in HTML with the real inbox.
+    const recipient = form.dataset.recipient || 'thrivebyridwan@gmail.com'; // PLACEHOLDER: replace in HTML with the real inbox.
     const subject = formData.get('subject') || 'Thrive & Co. inquiry';
     const bodyLines = [
       `Name: ${formData.get('name') || ''}`,
@@ -337,3 +337,155 @@ const _origKeydown = document.onkeydown;
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeLightbox();
 });
+
+// ── PROCESS CHAIN — SVG path + scroll-driven animation ───
+(function () {
+  const grid = document.getElementById('process-grid');
+  if (!grid) return;
+
+  const steps = [
+    document.getElementById('process-step-1'),
+    document.getElementById('process-step-2'),
+    document.getElementById('process-step-3'),
+  ];
+  if (steps.some(s => !s)) return;
+
+  // ── 1. Inject SVG overlay ──────────────────────────────
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.id = 'process-svg';
+  svg.setAttribute('aria-hidden', 'true');
+
+  // Gradient definitions (light + dark mode)
+  svg.innerHTML = `
+    <defs>
+      <linearGradient id="processGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%"   stop-color="#6E2233" stop-opacity="0.9"/>
+        <stop offset="100%" stop-color="#8D3A46" stop-opacity="0.4"/>
+      </linearGradient>
+      <linearGradient id="processGradDark" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%"   stop-color="#c45a6e" stop-opacity="0.9"/>
+        <stop offset="100%" stop-color="#e07a8c" stop-opacity="0.4"/>
+      </linearGradient>
+    </defs>
+    <path id="process-path"/>
+    <circle id="process-dot" r="5"/>
+  `;
+  grid.appendChild(svg);
+
+  const path = document.getElementById('process-path');
+  const dot  = document.getElementById('process-dot');
+
+  // ── 2. Build path through step circle centres ──────────
+  function getStepCentre(card) {
+    const stepEl = card.querySelector('.step');
+    const gridRect = grid.getBoundingClientRect();
+    const rect = stepEl.getBoundingClientRect();
+    return {
+      x: rect.left - gridRect.left + rect.width  / 2,
+      y: rect.top  - gridRect.top  + rect.height / 2,
+    };
+  }
+
+  function buildPath() {
+    const pts = steps.map(getStepCentre);
+    // Smooth cubic bezier curve through all 3 points
+    const cp1x = (pts[0].x + pts[1].x) / 2;
+    const cp2x = (pts[1].x + pts[2].x) / 2;
+    const d = [
+      `M ${pts[0].x} ${pts[0].y}`,
+      `C ${cp1x} ${pts[0].y}, ${cp1x} ${pts[1].y}, ${pts[1].x} ${pts[1].y}`,
+      `C ${cp2x} ${pts[1].y}, ${cp2x} ${pts[2].y}, ${pts[2].x} ${pts[2].y}`,
+    ].join(' ');
+    path.setAttribute('d', d);
+
+    // Re-measure total path length for dash animation
+    const len = path.getTotalLength();
+    path.style.strokeDasharray  = len;
+    path.style.strokeDashoffset = len;
+    return len;
+  }
+
+  let pathLen = buildPath();
+
+  // Rebuild on resize (handles orientation changes)
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => { pathLen = buildPath(); }, 120);
+  }, { passive: true });
+
+  // ── 3. Scroll-driven progress ──────────────────────────
+  function getScrollProgress() {
+    const section = document.getElementById('process');
+    if (!section) return 0;
+    const rect  = section.getBoundingClientRect();
+    const winH  = window.innerHeight;
+    // Progress: 0 when section top hits bottom of viewport → 1 when section bottom hits top
+    const start = winH;
+    const end   = -rect.height;
+    const raw   = (start - rect.top) / (start - end);
+    return Math.min(1, Math.max(0, raw));
+  }
+
+  function updateChain() {
+    const progress = getScrollProgress();
+    if (progress <= 0) {
+      path.style.strokeDashoffset = pathLen;
+      dot.style.opacity = '0';
+      steps.forEach(s => s.classList.remove('step-active'));
+      return;
+    }
+
+    // Draw the path
+    path.style.strokeDashoffset = pathLen * (1 - progress);
+
+    // Move dot along path
+    if (pathLen > 0) {
+      const pt = path.getPointAtLength(Math.min(progress * pathLen, pathLen - 1));
+      dot.setAttribute('cx', pt.x);
+      dot.setAttribute('cy', pt.y);
+      dot.style.opacity = progress > 0.05 && progress < 0.98 ? '1' : '0';
+    }
+
+    // Activate step circles as path reaches them
+    const thresholds = [0.05, 0.45, 0.85];
+    steps.forEach((step, i) => {
+      step.classList.toggle('step-active', progress >= thresholds[i]);
+    });
+  }
+
+  window.addEventListener('scroll', updateChain, { passive: true });
+  updateChain(); // run once on load
+
+  // ── 4. Number counter on step circles ─────────────────
+  function animateCounter(el, target, duration) {
+    const start = performance.now();
+    const from  = 0;
+    el.textContent = from;
+    function tick(now) {
+      const t = Math.min((now - start) / duration, 1);
+      // Ease out cubic
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = Math.round(from + (target - from) * eased);
+      if (t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // Trigger counters when section enters view
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      steps.forEach((card, i) => {
+        const stepEl = card.querySelector('.step');
+        const target = parseInt(stepEl.dataset.step, 10);
+        // Stagger each counter
+        setTimeout(() => animateCounter(stepEl, target, 600), i * 280);
+      });
+      counterObserver.disconnect();
+    });
+  }, { threshold: 0.3 });
+
+  const section = document.getElementById('process');
+  if (section) counterObserver.observe(section);
+})();
